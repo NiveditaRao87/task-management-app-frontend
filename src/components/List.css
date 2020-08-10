@@ -1,0 +1,34 @@
+.list {
+    width: 250px;
+    min-height: 50px;
+    border: 1px solid grey;
+    margin: 4px;
+    border-radius: 5%;
+    text-align: left;
+    padding: 10px;
+    background-color: #ebecf0;
+  }
+
+.add-card {
+    border: none;
+    width: 246px;
+    min-height: 40px;
+    background-color: #282c34;
+    border-radius: 3%;
+    color: #ebecf0;
+}
+
+.add-card:hover {
+    opacity: 0.5;
+}
+
+.lists-wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.cards-wrapper {
+    margin: 5px;
+    border-radius: 5%;
+    background-color: whitesmoke;
+}
