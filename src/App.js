@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import List from './components/List'
+import AddArea from './components/AddArea'
 
 const App = () => {
   
@@ -54,32 +55,23 @@ const App = () => {
   
   const [lists,setLists] = useState(preloadedLists)
   const [cards,setCards] = useState(preloadedCards)
-  // This state stores the list id on which an add card has been requested, it will then be used to conditionally
-  // render the add card form 
-  const [addCardListId,setAddCardListId] = useState('')
-  //Input from textarea of new card
-  const [newCard,setNewCard] = useState('')
 
-  const handleAddCard = (listId) => {
-    setAddCardListId(listId)
+  const handleAddNewList = (title,...ignore) => {
+      const listObject = {
+        title,
+        id: lists.length + 1
+      }
+      setLists(lists.concat(listObject))
+  }
+  const handleAddNewCard = (title,listId) => {
+      const cardObject = {
+        title,
+        listId,
+        id: cards.length + 1
+      }
+      setCards(cards.concat(cardObject))
   }
 
-  const handleCardInput = (e) => {
-    //Input from the textarea of the add card form
-    setNewCard(e.target.value)
-  }
-
-  const handleAddNewCard = (event,listId,title) => {
-    event.preventDefault()
-    const cardObject = {
-      title,
-      listId,
-      id: cards.length + 1
-    }
-    setCards(cards.concat(cardObject))
-    setAddCardListId(null) //so that the add card form wont be rendered 
-  }
-  
   return (
     <div className='App'>
       <header className='App-header'>
@@ -87,16 +79,18 @@ const App = () => {
       </header>
       <main className='main'>
       {lists.map(list => 
-      <List key={list.id} 
-            list={list} 
-            cardsInList={cards.filter(card => card.listId === list.id)}
-            addCardListId={addCardListId}
-            onAddCard={handleAddCard}
-            newCard={newCard}
-            onCardInput={handleCardInput} 
-            addNewCard={handleAddNewCard}
-            />)}
-        <button className='add-list'> + Add List</button>
+      <List 
+        key={list.id} 
+        list={list} 
+        cardsInList={cards.filter(card => card.listId === list.id)}
+        onAddCard={handleAddNewCard}
+
+      />)}
+      <AddArea  
+        area='list'
+        id={null} 
+        addNewItem={handleAddNewList}
+        />
       </main>
     </div>
   )

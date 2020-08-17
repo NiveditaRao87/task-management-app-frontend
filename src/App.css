@@ -5,33 +5,25 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 5vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  min-height: 10vh;
+  max-height: 10vh;
   font-size: calc(5px + 2vmin);
   color: white;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 .main {
-  margin-top: 1vh;
+  padding-top: 11vh;
+  margin-left: 20px;
   text-align: left;
   display: flex;
   flex-direction: row;
 }
 
-.add-list {
-  width: 250px;
-  height: 50px;
-  margin: 4px;
-  background-color: transparent;
-  border-radius: 5%;
-  color: #172b4d;
-}
 
-.add-list:hover {
-  opacity: 0.6;
-}
+
 
 
