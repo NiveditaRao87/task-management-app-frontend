@@ -7,10 +7,23 @@ Stop and add backend
 Open calendar option in card to show the time spent on that task
 Then activity tracker.... random thoughts, not all needs to be a part of the first version.
 
-Observations - it is a little verbose to keep lifting state up, I find that i keep on adding more and more props and soon the code might become too difficult to read. 
-
 Things done so far created lists, and card components,  handled adding of cards, simple css is done temporarily, 
 Time spent in thinking what I want to do and development - 4 hours
 Refactor the code so that a single form is used for both add card and add lists, now use it to add list form, maybe refactor button to do the same, add background image
 Apply newly learnt react fragment knowledge maybe to say make css flex work better?
 also useReducer or Redux 
+Use a linter, make props required for relevant components
+
+References:
+
+https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82
+
+asciant:- https://github.com/react-hook-form/react-hook-form/issues/566
+
+For modal css:
+https://peteris.rocks/blog/modal-window-in-react-from-scratch/
+
+For timer:
+https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
+https://www.codespeedy.com/convert-seconds-to-hh-mm-ss-format-in-javascript/
+

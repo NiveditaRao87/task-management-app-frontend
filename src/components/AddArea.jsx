@@ -13,7 +13,6 @@ const AddArea = ({ area, id, addNewItem }) => {
         const handleClickOutside = e => {
             if (addFormWrapRef.current.contains(e.target)) {
                 // inside click
-                console.log(e.target)
                 return
               }
               //Submit the form on outside click, it will make a new item (list/card) if the field is not empty. 
@@ -22,14 +21,12 @@ const AddArea = ({ area, id, addNewItem }) => {
         }
         if(showForm){
             document.addEventListener("mousedown", handleClickOutside)
-            console.log('listener was added')
         } else {
             document.removeEventListener("mousedown", handleClickOutside)
         }
 
         return () => {
             document.removeEventListener("mousedown", handleClickOutside)
-            console.log('listener was removed')
         }
     },[showForm])
 
