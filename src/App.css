@@ -1,27 +1,41 @@
+body{
+  opacity: 1;
+  background: url('https://source.unsplash.com/daily?landscape,green') no-repeat center center fixed;
+  background-size: cover;
+}
+
 .App {
   text-align: center;
-  font-family: "Montserrat", sans-serif;
-  opacity: 1
+  font-family: 'Montserrat', sans-serif;
+  overflow: cover; 
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  max-height: 10vh;
-  font-size: calc(5px + 2vmin);
+  background-color: rgba(0, 0, 0, 0.4);
+  min-height: 5vh;
+  max-height: 5vh;
+  font-size: calc(2px + 2vmin);
+  font-style: italic;
   color: white;
   position: fixed;
+  top: 2px;
   right: 0;
   width: 100%;
   z-index: 2;
 }
 
 .main {
-  padding-top: 11vh;
+  padding-top: 6vh;
   margin-left: 20px;
   text-align: left;
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
 }
 
 

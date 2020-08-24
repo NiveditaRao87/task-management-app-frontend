@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import './App.css'
 import List from './components/List'
 import AddArea from './components/AddArea'
 import CardDetails from './components/CardDetails'
 import Modal from './components/Modal'
+import './App.css'
 
 const App = () => {
   
   const preloadedLists = [
     {
-      title: "To do",
+      title: "To do", 
       id: 0
     },
     {
@@ -69,7 +69,7 @@ const App = () => {
       id: 5
     }
   ]
-  
+
   const [lists, setLists] = useState(preloadedLists)
   const [cards, setCards] = useState(preloadedCards)
   const [showCard, setShowCard] = useState(false)
@@ -99,7 +99,7 @@ const App = () => {
   return (
     <div className='App'>
       <header className='App-header'>
-      <h1>Task Management App</h1>
+      <h1>Task Manager</h1>
       </header>
       <main className='main'>
       {lists.map(list => 

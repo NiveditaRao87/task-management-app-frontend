@@ -10,11 +10,23 @@ Then activity tracker.... random thoughts, not all needs to be a part of the fir
 Things done so far created lists, and card components,  handled adding of cards, simple css is done temporarily, 
 Time spent in thinking what I want to do and development - 4 hours
 Refactor the code so that a single form is used for both add card and add lists, now use it to add list form, maybe refactor button to do the same, add background image
-Apply newly learnt react fragment knowledge maybe to say make css flex work better?
-also useReducer or Redux 
-Use a linter, make props required for relevant components
+Creating a task management app inspired by Trello and Clockify. 
+It will merge the functionalities of both but at a very simple level. Task creation will be tracked by a timer and a report should be generated to show time spent on tasks.
+
+Functionality implemented so far: Task creation, list creation, card details shown.
+Next steps:
+1. Connect to database. Publish at herokku.
+2. Take time tracking state up from the card details component, so time can be tracked after the task has been closed, and display timer on a task if it is on for a certain task. Multiple timers cannot be started at the same time since currently it is a personal use task manager. 
+3. Login functionality.
+4. Moving tasks, completing tasks, archiving tasks, showing archived tasks, unarchiving tasks, drag and drop. Activity tracking, time tracking, date picker. All card details modifications.
+5. Linking tasks to projects. Showing reports of time spent on projects. Activity log of projects and so on.
+6. Check accessibility, accreditation etc.
+
 
 References:
+
+https://trello.com/
+https://clockify.me/
 
 https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82
 
@@ -27,3 +39,5 @@ For timer:
 https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
 https://www.codespeedy.com/convert-seconds-to-hh-mm-ss-format-in-javascript/
 
+Unsplash API:
+https://source.unsplash.com/

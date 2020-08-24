@@ -1,9 +1,8 @@
 .add-card {
-    margin: 5px;
-    width: 246px;
+    width: 100%;
     min-height: 40px;
-    background-color: transparent;
-    border-radius: 5%;
+    background-color: #ebecf0;
+    border-radius: 5px; /* % causes weord borders */
     border: 1px solid grey;
     color: #282c34;
     font-size: 1rem;
@@ -14,26 +13,56 @@
 }
 .add-list {
     width: 250px;
+    min-width: 250px;
     height: 50px;
     margin: 4px;
-    background-color: #ebecf0;
-    border-radius: 5%;
+    background-color:  rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
     border: 1px solid grey;
-    color: #172b4d;
+    color: white;/* #172b4d;*/
     font-size: 1rem;
+    text-align: left;
   }
 .add-list:hover {
+    background-color: white;
     opacity: 0.5;
+    color: black;
 }
 
 .add-form-wrapper {
-    border: 1px solid black;
+    border: 1px solid grey;
     height: 15vh;
-    background-color: #ebecf0;
-    border-radius: 5%;
+    background-color: transparent;
+    border-radius: 10px;
     padding: 15px;
 }
 .add-form-wrapper textarea {
-    width: 100%;
-    min-height: 10vh;;
+    min-height: 10vh;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.add-area-btns {
+    display: flex;
+}
+
+.add-btn {
+    font-size: 1.2rem;
+    flex-grow: 1;
+    border-radius: 5px;
+}
+
+.add-btn:hover {
+    opacity: 0.5
+}
+
+.cancel-btn {
+    flex-grow: 1;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.cancel-btn:hover {
+    opacity: 0.5;
 }

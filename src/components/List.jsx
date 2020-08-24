@@ -12,7 +12,7 @@ const Card = ({ card, onOpenCard }) => {
 const List = ({ list, cardsInList, onAddCard, onOpenCard }) => {
 
     return (<div className='list'>
-    <h2>{list.title}</h2>
+    <h2 className='list-title'>{list.title}</h2>
     <div className='cards-wrapper'>
       {cardsInList.map(card => <Card key={card.id} card={card} onOpenCard={onOpenCard} />)}
     </div>

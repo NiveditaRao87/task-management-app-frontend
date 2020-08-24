@@ -49,13 +49,15 @@ const AddArea = ({ area, id, addNewItem }) => {
       <form id='add-form' ref={addFormRef} onSubmit={onSubmit} >
           <textarea  
               id='add-input'
-              placeholder='Enter a title for this card...'
+              placeholder={`Enter a title for the ${area}`}
               value={newItem}
               onChange={e => setNewItem(e.target.value)}
               autoFocus
           />
-          <button type='submit'> Add </button>
-          <button type= 'reset' onClick={onCancel}> Cancel </button>
+          <div className='add-area-btns'>
+            <button type='submit' className='add-btn'> Add </button>
+            <button type= 'reset' onClick={onCancel} className='cancel-btn'> Cancel </button>
+          </div>
       </form>
       </div>
     : <button className={`add-${area}`} onClick={() => setShowForm(true)}> 
