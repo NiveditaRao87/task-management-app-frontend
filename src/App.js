@@ -9,8 +9,6 @@ import './App.css'
 
 const App = () => {
   
-  
-
   const [lists, setLists] = useState('')
   // const [cards, setCards] = useState('')
   const [showCard, setShowCard] = useState(false)

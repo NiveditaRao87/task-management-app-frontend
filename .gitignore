@@ -19,5 +19,6 @@
 npm-debug.log*
 
 #to be removed later cypress which is now empty
+Editable
 cypress
 cypress.json

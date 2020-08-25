@@ -1,11 +1,11 @@
 .modal {
     position: fixed;
     z-index: 10;
-    top: 10vh;
     width: auto;
+    left: 0;
+    right: 0;
+    top: 0;
     height: 100vh;
-    left: 20vw;
-    right: 20vw;
     overflow: auto;
     background-color: white;
     border: 1px solid black;
@@ -22,10 +22,10 @@
     background: rgba(0, 0, 0, 0.4)
   }
 
-  @media(max-width: 800px) {
+  @media(min-width: 992px) {
     .modal {
-        left: 0;
-        right: 0;
-        top: 0;
+        top: 10vh;
+        left: 20vw;
+        right: 20vw;
     }
   }
