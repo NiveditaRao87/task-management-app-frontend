@@ -41,6 +41,12 @@
     font-family: "Montserrat", sans-serif;
     font-size: 1.2rem;
     border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;  /* the width and height will include content, padding and border */
+}
+
+.add-form {
+    width: 100%;
 }
 
 .add-area-btns {
@@ -61,8 +67,10 @@
     flex-grow: 1;
     border-radius: 5px;
     font-size: 1.2rem;
+    
 }
 
 .cancel-btn:hover {
     opacity: 0.5;
 }
+

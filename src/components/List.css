@@ -43,3 +43,9 @@
     font-size: 1.1rem;
     padding: 2px;
 }
+
+@media(max-width: 900px) {
+    .list {
+        width: 90%;
+    }
+  }

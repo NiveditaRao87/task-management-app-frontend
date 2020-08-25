@@ -49,7 +49,7 @@ const CardDetails = ({ card, onCardClose }) => {
         <p><strong>Due date</strong> {card.dueDate}</p>
         <i className="far fa-clock" style={clockStyle} onClick={onTimerClick}> {timer.on? 'Stop': 'Start'} timer</i>
         {timer.on && <p>{new Date(timer.timeSpent).toISOString().substr(11, 8)}</p>}
-        {([...card.timeSpent]
+        {card.timeSpent && ([...card.timeSpent]
         .sort((a,b) => b.start-a.start))
         .map(timeSpent => <p key={timeSpent.start} >{formatDate(timeSpent.start)} - {formatDate(timeSpent.stop)}</p> )}
     </div>

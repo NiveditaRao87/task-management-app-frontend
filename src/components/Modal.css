@@ -1,0 +1,31 @@
+.modal {
+    position: fixed;
+    z-index: 10;
+    top: 10vh;
+    width: auto;
+    height: 100vh;
+    left: 20vw;
+    right: 20vw;
+    overflow: auto;
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px
+  }
+
+.backdrop {
+    position: fixed;
+    width: 100%;
+    min-height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.4)
+  }
+
+  @media(max-width: 800px) {
+    .modal {
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+  }

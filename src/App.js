@@ -1,99 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import List from './components/List'
 import AddArea from './components/AddArea'
 import CardDetails from './components/CardDetails'
 import Modal from './components/Modal'
+import listService from './services/lists'
+import cardService from './services/cards'
 import './App.css'
 
 const App = () => {
   
-  const preloadedLists = [
-    {
-      title: "To do", 
-      id: 0
-    },
-    {
-      title: "WIP",
-      id: 1
-    },
-    {
-      title: 'Parked',
-      id: 2
-    }
-  ]
+  
 
-  const preloadedCards = [
-    {
-      title: 'React official documentation',
-      description: 'Start this task after full stack open course is complete',
-      listId: 0,
-      timeSpent: [],
-      id: 0
-    },
-    {
-      title: 'Javascript perusteet',
-      description: 'Do this course to learn some basic finnish terms related to IT',
-      dueDate: new Date('September 30, 2020 23:00').toLocaleString('en-GB', {year: 'numeric', month: 'short', day: 'numeric'}),
-      timeSpent: [],
-      listId: 0,
-      id: 1
-    },
-    {
-      title: 'Full stack open course',
-      description: 'Currently doing part 5 of this course, complete till part 7 by end of month',
-      dueDate: new Date('August 31, 2020 23:00').toLocaleString('en-GB', {year: 'numeric', month: 'short', day: 'numeric'}),
-      timeSpent: [],
-      listId: 1,
-      id: 2
-    },
-    {
-      title: 'First version of Task Management Tool',
-      description: 'Should be able to set timer and track tasks by the end of this month. Should also have a database',
-      dueDate: new Date('September 1, 2020 23:00').toLocaleString('en-GB', {year: 'numeric', month: 'short', day: 'numeric'}),
-      timeSpent: [],
-      listId : 1,
-      id: 3
-    },
-    {
-      title: 'FCC javascript',
-      description: 'No deadline for this. Do this when other tasks are too overwhelming',
-      timeSpent: [],
-      listId: 1,
-      id: 4
-    },
-    {
-      title: 'Find the species',
-      description: 'My pet project. Must be clear on requirements first. Take it up after the Task management tool is complete',
-      timeSpent: [],
-      listId: 2,
-      id: 5
-    }
-  ]
-
-  const [lists, setLists] = useState(preloadedLists)
-  const [cards, setCards] = useState(preloadedCards)
+  const [lists, setLists] = useState('')
+  // const [cards, setCards] = useState('')
   const [showCard, setShowCard] = useState(false)
   const [cardToShow, setCardToShow] = useState('')
 
+  useEffect(() =>{
+    listService
+      .getAll()
+      .then(initialLists => {
+        setLists(initialLists)
+      })
+      
+  },[])
+
   const handleAddNewList = (title,...ignore) => {
-      const listObject = {
-        title,
-        id: lists.length + 1
-      }
-      setLists(lists.concat(listObject))
+      const listObject = { title }
+      
+      listService
+      .create(listObject)
+      .then(returnedList => {
+        setLists(lists.concat(returnedList))
+      })
   }
-  const handleAddNewCard = (title,listId) => {
+  const handleAddNewCard = (title,list) => {
       const cardObject = {
         title,
-        listId,
-        id: cards.length + 1
+        list
       }
-      setCards(cards.concat(cardObject))
+      cardService
+        .create(cardObject)
+        .then(returnedCard => {
+          setLists(lists.map(l => l.id !== list ? l : {...l,cards: l.cards.concat({ 
+            title: returnedCard.title,
+            dueDate: returnedCard.dueDate,
+            currentTask: returnedCard.currentTask,
+            id: returnedCard.id
+          }) 
+        }))
+        })
   }
 
-  const handleOpenCard = (id) => {  
+  const handleOpenCard = async (id) => {  
     setShowCard(true)
-    setCardToShow(cards.find(card => card.id === id))
+    // setCardToShow(cards.find(card => card.id === id))
+    const returnedCard = await cardService.getById(id)
+    setCardToShow(returnedCard)
+    
   }
 
   return (
@@ -102,16 +66,17 @@ const App = () => {
       <h1>Task Manager</h1>
       </header>
       <main className='main'>
-      {lists.map(list => 
+      {lists.length !== 0 && lists.map(list => 
       <List 
         key={list.id} 
         list={list} 
-        cardsInList={cards.filter(card => card.listId === list.id)}
+        cardsInList={list.cards}
         onAddCard={handleAddNewCard}
         onOpenCard={handleOpenCard}
       />)}
       <Modal show={showCard} onCloseModal={ () => setShowCard(false)}>
-        <CardDetails card={cardToShow} onCardClose={() => setShowCard(false)} />
+        <CardDetails card={cardToShow} onCardClose={() => setShowCard(false)} /> 
+        {/* {JSON.stringify(cardToShow)} */}
       </Modal>
       <AddArea  
         area='list'
