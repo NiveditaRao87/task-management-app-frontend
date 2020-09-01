@@ -1,5 +1,6 @@
 import React from 'react'
 import AddArea from './AddArea'
+import Editable from './Editable'
 import './List.css'
 
 const Card = ({ card, onOpenCard }) => {
@@ -12,7 +13,9 @@ const Card = ({ card, onOpenCard }) => {
 const List = ({ list, cardsInList, onAddCard, onOpenCard }) => {
 
     return (<div className='list'>
-    <h2 className='list-title'>{list.title}</h2>
+    <Editable>
+      <h2 className='list-title'>{list.title}</h2>
+    </Editable>
     <div className='cards-wrapper'>
       {cardsInList.map(card => <Card key={card.id} card={card} onOpenCard={onOpenCard} />)}
     </div>

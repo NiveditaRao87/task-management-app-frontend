@@ -1,15 +1,14 @@
 .add-card {
-    width: 100%;
     min-height: 40px;
-    background-color: #ebecf0;
+    background-color: transparent;
     border-radius: 5px; /* % causes weord borders */
-    border: 1px solid grey;
-    color: #282c34;
+    border: none;
+    color: #f9f6f7;
     font-size: 5vmax;
     text-align: left;
 }
 .add-card:hover {
-    opacity: 0.5;
+    background: rgba(0,0,0,0.5);
 }
 .add-list {
     width: 90vw;
@@ -17,12 +16,12 @@
     background-color:  rgba(0, 0, 0, 0.4);
     border-radius: 5px;
     border: 1px solid grey;
-    color: white;/* #172b4d;*/
+    color: #f9f6f7;/* #172b4d;*/
     font-size: 5vmax;
     text-align: center;
   }
 .add-list:hover {
-    background-color: white;
+    background-color: #f9f6f7;
     opacity: 0.5;
     color: black;
 }
@@ -75,6 +74,8 @@
 @media(min-width: 992px) {
     .add-card {
         font-size: 1.2rem; 
+        max-width: calc(100% - 20px);
+        
     }
     .add-list {
         font-size: 1.2rem;

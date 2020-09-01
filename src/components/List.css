@@ -18,11 +18,14 @@
   }
 
 .list-title {
-    color: black;
-    background-color: white;
+    color: #f9f6f7;
     padding-left: 5px;
     font-size: 5vmax;
     font-weight: 600;
+    margin-right: 20px;
+    border-radius: 5px;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 .cards-wrapper {
@@ -32,7 +35,7 @@
 
 .card {
     padding-left: 5px;
-    background-color: white;
+    background-color: #f9f6f7;
     margin-bottom: 5px;
     word-wrap: break-word;
     border-radius: 5px;
@@ -47,7 +50,29 @@
 @media(min-width: 992px) {
     .list {
         width: 250px;
+        max-height: 80vh;
+        scroll-margin: 50px 0 0 50px;
     }
+    .cards-wrapper{
+        overflow: auto;
+        max-height: 100vh;
+        margin-right: 10px;
+    }
+    .card {
+    margin-right: 10px;
+
+    }
+    /* .cards-wrapper::-webkit-scrollbar {
+      background-color: transparent;
+    }
+    
+    /*Track 
+    .cards-wrapper::-webkit-scrollbar-track {
+      /* background: #f1f1f1;  
+      border-radius: 10px;
+      background-color: transparent;
+    }
+      */
     .list-title {
         font-size: 1.2rem;
     }
