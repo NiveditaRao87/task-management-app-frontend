@@ -21,3 +21,7 @@ npm-debug.log*
 #to be removed later cypress which is now empty
 cypress
 cypress.json
+
+#to be removed later
+query*
+src/routes.js

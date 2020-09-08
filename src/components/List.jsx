@@ -13,7 +13,7 @@ const Card = ({ card, onOpenCard }) => {
 const List = ({ list, cardsInList, onAddCard, onOpenCard }) => {
 
     return (<div className='list'>
-    <Editable>
+    <Editable type='text'>
       <h2 className='list-title'>{list.title}</h2>
     </Editable>
     <div className='cards-wrapper'>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import DatePicker from 'react-datepicker'
 import './Editable.css'
 
 // The reuseable editable component is used to show a text box when an element is clicked.
@@ -8,7 +9,7 @@ import './Editable.css'
 // and useImperativeHandle as explained here https://fullstackopen.com/en/part5/props_children_and_proptypes#references-to-components-with-ref 
 // This component in its current state can only be used if there is just one child within this component.
 // This solution will work but I think I will end up using too many refs so should I use a reducer?
-const Editable = ({ children, updateElement }) => {
+const Editable = ({ children, type, updateElement }) => {
     
     const [edit,setEdit] = useState(false)
     const [newValue,setNewValue] = useState(children.props.children) 
@@ -20,12 +21,13 @@ const Editable = ({ children, updateElement }) => {
     
     return edit ? 
     <form onSubmit={handleSubmit}>
-      <textarea
+      type === 'text' ? <textarea
         className='editable'
         autoFocus
         value={newValue}
         onChange={({ target }) => setNewValue(target.value)}
       /> 
+      : type === 'date' ? <DatePicker selected={newValue} onChange={date => setNewValue(date)}/>
     </form>
     : <>{ children }</>
 }

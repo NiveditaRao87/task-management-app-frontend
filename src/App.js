@@ -58,6 +58,11 @@ const App = () => {
     
   }
 
+  const handleCloseModal = () => {
+    setShowCard(false)
+    setCardToShow(null)
+  }
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -72,9 +77,8 @@ const App = () => {
         onAddCard={handleAddNewCard}
         onOpenCard={handleOpenCard}
       />)}
-      <Modal show={showCard} onCloseModal={ () => setShowCard(false)}>
+      <Modal show={showCard} onCloseModal={handleCloseModal}>
         <CardDetails card={cardToShow} onCardClose={() => setShowCard(false)} /> 
-        {/* {JSON.stringify(cardToShow)} */}
       </Modal>
       <AddArea  
         area='list'
