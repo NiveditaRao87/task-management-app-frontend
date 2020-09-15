@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 const CardDetails = ({ card, onCardClose }) => {
     
     const [timer,setTimer] = useState({on: false, start: 0,timeSpent: 0}) //Stores the start time if the timer is on
-
+    
     useEffect(() => {
         let interval
         if(timer.on){
@@ -45,10 +45,15 @@ const CardDetails = ({ card, onCardClose }) => {
     } 
     
     return <div>
-        <h3>{card.title}</h3>
-        <p>in list <strong>{card.list.title}</strong></p>
-        <i className="fas fa-times" style={cancelStyle} onClick={onCardClose}></i>
-        <p><strong>Description</strong> {card.description}</p>
+        <i 
+          tabIndex='0'
+          className="fas fa-times" 
+          style={cancelStyle} 
+          onClick={onCardClose} 
+          onKeyDown={e => e.key === 'Enter' && onCardClose} />
+        <h3 tabIndex='0'>{card.title}</h3>
+        <p >in list <strong tabIndex='0'>{card.list.title}</strong></p>
+        <p><strong>Description</strong> <span tabIndex='0'>{card.description}</span></p>
         <p><strong>Due date</strong> <span>{card.dueDate}</span></p>
         <i className="far fa-clock" style={clockStyle} onClick={onTimerClick}> {timer.on? 'Stop': 'Start'} timer</i>
         {timer.on && <p>{new Date(timer.timeSpent).toISOString().substr(11, 8)}</p>}

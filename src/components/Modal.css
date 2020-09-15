@@ -1,4 +1,4 @@
-.modal {
+#modal {
     position: fixed;
     z-index: 10;
     width: auto;
@@ -12,7 +12,7 @@
     padding: 20px;
   }
 
-.backdrop {
+#backdrop {
     position: fixed;
     width: 100%;
     min-height: 100%;
@@ -23,7 +23,7 @@
   }
 
   @media(min-width: 992px) {
-    .modal {
+    #modal {
         top: 10vh;
         left: 20vw;
         right: 20vw;

@@ -31,3 +31,14 @@ For timer:
 https://upmostly.com/tutorials/build-a-react-timer-component-using-hooks
 https://www.codespeedy.com/convert-seconds-to-hh-mm-ss-format-in-javascript/
 
+For solving my issue with setting the editable state variable inside the Editable component(a reuseable component which makes any component inside it editable when clicked or focused). Solved by adding an event handler to the child from the Editable component as shown in this blog.
+https://blog.logrocket.com/the-complete-guide-to-building-inline-editable-ui-in-react/
+
+To remove warning of memory leak due to state update after component unmount
+https://www.robinwieruch.de/react-warning-cant-call-setstate-on-an-unmounted-component
+
+Trapping focus inside a modal for accessibility
+https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has a small error and works only because there are only two focusable elements in the modal but otherwise great.
+https://uxdesign.cc/how-to-trap-focus-inside-modal-to-make-it-ada-compliant-6a50f9a70700
+
+

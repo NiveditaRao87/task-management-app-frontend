@@ -24,4 +24,3 @@ cypress.json
 
 #to be removed later
 query*
-src/routes.js
