@@ -5,11 +5,25 @@
     padding-left: 5px;
     font-size: 5vmax;
     margin-right: 20px;
-    border-radius: 5px;
     margin-top: 0;
     margin-bottom: 20px;
 }
 
+.editable-card-title {
+    font-size: 1.2rem;
+    display: block;
+    width: 90%;
+    margin-bottom: 0;
+    height: auto;
+    overflow-wrap: break-word;
+    height: inherit;
+}
+/* .editable-child {
+    display: block;
+} */
+/* .editable-form {
+    display: inline;
+} */
 @media(min-width: 992px) {
 
     .editable-list-title {

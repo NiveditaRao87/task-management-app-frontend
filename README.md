@@ -1,19 +1,25 @@
 Published at https://obscure-waters-16235.herokuapp.com/
+For demo please use username: admin, password: password
 
-Creating a task management app inspired by Trello and Clockify. 
-It will merge the functionalities of both but at a very simple level. Task creation will be tracked by a timer and a report should be generated to show time spent on tasks.
+This project is a task management app inspired by Trello and Clockify. 
+It will merge the functionalities of both but at a very simple level. Task creation will be tracked by a timer and a report should be generated to show time spent on tasks. 
+A mentor at a Js react club I participated in suggested this project as it is very easily scalable. I found this to be really true, I built this project because then I dont really have to struggle with defining requirements and can just start with it so I get to learn and practice a lot. I can also keep increasing the complexity.
 
-Functionality implemented so far: Task creation, list creation, card details shown, connected to database, published at heroku
+Functionality implemented so far: 
+1. List and card CRUD including moveing card between lists
+2. Authorisation
+3. Partially accessible
 
 Next steps:
-1. Add card detail modifications.
-2. Take time tracking state up from the card details component, so time can be tracked after the task has been closed, and display timer on a task if it is on for a certain task. Multiple timers cannot be started at the same time since currently it is a personal use task manager. Add date picker. Make the list scrollable instead of the page.
-3. Login functionality.
-4. Moving tasks, completing tasks, archiving tasks, showing archived tasks, unarchiving tasks, drag and drop. Activity tracking, time tracking, date picker. All card details modifications.
-5. Linking tasks to projects. Showing reports of time spent on projects. Activity log of projects and so on.
-6. Check accessibility, accreditation etc.
-7. Add ability to upload on image as background (using multer)/ or random
-
+1. Complete time tracking functionality
+2. Registration
+3. Date picker for due date
+4. Fix accessibility
+5. Fix responsiveness
+6. Fix CSS
+7. Add unit tests
+8. Cypress
+9. Drag and drop to move card and lists
 
 References:
 
@@ -38,7 +44,7 @@ To remove warning of memory leak due to state update after component unmount
 https://www.robinwieruch.de/react-warning-cant-call-setstate-on-an-unmounted-component
 
 Trapping focus inside a modal for accessibility
-https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has a small error and works only because there are only two focusable elements in the modal but otherwise great.
+https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has an error and works only because there are only two focusable elements in the modal but otherwise great.
 https://uxdesign.cc/how-to-trap-focus-inside-modal-to-make-it-ada-compliant-6a50f9a70700
 
 

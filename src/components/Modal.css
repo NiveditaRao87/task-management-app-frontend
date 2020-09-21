@@ -5,11 +5,12 @@
     left: 0;
     right: 0;
     top: 0;
-    /* height: 100vh; */
-    overflow: auto;
+    max-height: 80vh;
     background-color: white;
     border: 1px solid black;
     padding: 20px;
+    display: block;
+    overflow-y: auto;
   }
 
 #backdrop {
@@ -21,6 +22,10 @@
     z-index: 9;
     background: rgba(0, 0, 0, 0.4)
   }
+
+.modal-content {
+  overflow-y: auto;
+}
 
   @media(min-width: 992px) {
     #modal {

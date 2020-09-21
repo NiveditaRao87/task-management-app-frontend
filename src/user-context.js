@@ -5,23 +5,23 @@ import storage from './utils/storage'
 
 export const UserContext = createContext()
 
-export const ContextWrapper = ({children}) => {
-    const defaultValueHandler = () => {
-        const user = storage.loadUser()
-        if (user) return true
-        return false
-    }
-    
-    const [isAuthenticated, setIsAuthenticated] = useState(defaultValueHandler())
+export const ContextWrapper = ({ children }) => {
+  const defaultValueHandler = () => {
+    const user = storage.loadUser()
+    if (user) return true
+    return false
+  }
 
-    const user = {
-        isAuthenticated, 
-        setIsAuthenticated
-    }
+  const [isAuthenticated, setIsAuthenticated] = useState(defaultValueHandler())
 
-    return (
-        <UserContext.Provider value={user}>
-            {children}
-        </UserContext.Provider>
-    )
+  const user = {
+    isAuthenticated,
+    setIsAuthenticated
+  }
+
+  return (
+    <UserContext.Provider value={user}>
+      {children}
+    </UserContext.Provider>
+  )
 }

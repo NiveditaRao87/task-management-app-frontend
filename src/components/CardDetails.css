@@ -1,0 +1,16 @@
+.card-title {
+    margin-bottom: 0;
+    overflow-wrap: break-word;
+}
+
+#lists-select {
+    font-family: 'Roboto' , sans-serif;
+}
+
+.delete-card {
+    font-size: 1rem;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 2vh;
+    right: 1vw;
+}
