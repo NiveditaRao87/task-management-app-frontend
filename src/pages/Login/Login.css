@@ -1,0 +1,99 @@
+.login-page {
+    background-color: #41444b;
+    opacity: 1;
+    height: 100vh;
+    text-align: center;
+    padding-top: 5vh;
+    color: white;
+    font-family: 'Roboto' , sans-serif;
+    overflow-y: scroll;
+}
+
+.login-page h1 {
+    padding-bottom: 10vh;
+}
+
+.main-login {
+    margin-top: 10vh;
+    max-height: 60vh;
+    margin: auto 20vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 15px;
+    overflow-y: hidden;
+}
+.login-img {
+    width: 30vw;
+}
+.login-img-wrapper {
+    display: block;
+    overflow-y: hidden;
+}
+.login-content {
+    background-color: #f6f6f6;
+    color: black;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    margin: auto 15%;
+    font-size: 1.2rem;
+}
+.login-form input, .login-form button {
+    border-radius: 20px;
+    height: 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid grey;
+    opacity: 0.8;
+}
+.login-form input:focus,button:focus {
+    border: 2px solid;
+    outline: none;
+}
+.login-form button:hover {
+    opacity: 1;
+}
+
+@media(max-width: 992px) {
+    .login-page {
+        height: 100vh;
+    }
+    
+    .login-page h1 {
+        padding-bottom: 5vh;
+        font-size: 3vh;
+    }
+    
+    .login-img-wrapper {
+        display: none;
+    }
+    
+    .main-login {
+        display: block;
+        margin: 0 15vw;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        border-radius: 0;
+        max-height: none;
+        font-size: 2vh;
+    }
+    .main-login::-webkit-scrollbar {
+        display: none;
+    }
+    .login-content h2 {
+        margin: 4vh auto;
+        padding-top: 4vh
+    }
+    .login-form input, .login-form button {
+        height: 3vh;
+        width: 100%;
+    }
+    .login-form input::placeholder, .login-form button {
+        font-size: 2vh;
+    }
+}
