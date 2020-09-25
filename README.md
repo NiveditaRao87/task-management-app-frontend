@@ -47,4 +47,5 @@ Trapping focus inside a modal for accessibility
 https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has an error and works only because there are only two focusable elements in the modal but otherwise great.
 https://uxdesign.cc/how-to-trap-focus-inside-modal-to-make-it-ada-compliant-6a50f9a70700
 
-
+Making redirects work on netlify
+https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa
