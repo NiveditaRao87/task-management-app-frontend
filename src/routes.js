@@ -16,9 +16,10 @@ const Routes = () => {
           { isAuthenticated ? <Kanban /> : <Redirect to='/login' /> }
         </Route>
         <Route path='/register' exact component={Register} />
-        <Route path='/login' exact>
-          { isAuthenticated ? <Redirect to='/' /> : <Login /> }
-        </Route>
+        {/* Have to explicitly pass props when a component
+        is called like this and not specified as a component */}
+        <Route path='/login' render={(props) =>
+          isAuthenticated ? <Redirect to='/' /> : <Login {...props} /> } />
       </Switch>
     </BrowserRouter>
   )

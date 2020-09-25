@@ -2,7 +2,10 @@
 //parameters back so that there is consistency when the modal is closed by an outside click or esc key and using
 // the cancel button from here.
 //To dos Pull timer and other functionalities out of this component its getting too crowded here
+// commented out any traces of timer from here and building a separate component to handle it
 //The new activity log should also be a new component.
+
+//Urgent to do blocking deployment, clean up code for timer
 
 import React, { useState, useEffect } from 'react'
 import cardService from '../services/cards'
@@ -29,7 +32,7 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
   const [cardDetails, setCardDetails] = useState('')
   const [showLists, setShowLists] = useState('')
 
-  const [timer,setTimer] = useState()
+  // const [timer,setTimer] = useState()
 
   useEffect(() => {
 
@@ -48,17 +51,17 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
   },[card])
 
 
-  useEffect(() => {
-    let interval
-    if(cardDetails.tickingFrom){
-      interval = setInterval(() => {
-        setTimer(new Date(Date.now()) - cardDetails.tickingFrom)
-      }, 1000)
-    } else {
-      clearInterval(interval)
-    }
-    return () => clearInterval(interval)
-  },[cardDetails.tickingFrom])
+  // useEffect(() => {
+  //   let interval
+  //   if(cardDetails.tickingFrom){
+  //     interval = setInterval(() => {
+  //       setTimer(new Date(Date.now()) - cardDetails.tickingFrom)
+  //     }, 1000)
+  //   } else {
+  //     clearInterval(interval)
+  //   }
+  //   return () => clearInterval(interval)
+  // },[cardDetails.tickingFrom])
 
   const cancelStyle = {
     position: 'absolute',
@@ -72,39 +75,39 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
   //     fontSize: '2rem'
   //   }
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'short', day: 'numeric',hour: 'numeric',minute: 'numeric', second: 'numeric' })
-  }
+  // const formatDate = (date) => {
+  //   return new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'short', day: 'numeric',hour: 'numeric',minute: 'numeric', second: 'numeric' })
+  // }
 
-  const onTimerClick = () => {
-    if(cardDetails.tickingFrom){
-      const timeSpent = [...cardDetails.timeSpent,{ start: cardDetails.tickingFrom, stop: Date.now() }]
-      const tickingFrom = null
-      const { list, id, title } = cardDetails
-      updateCard({ ...cardDetails,
-        list: list.id,
-        tickingFrom,
-        timeSpent
-      })
-      updateList({
-        list: list.id,
-        id,
-        title,
-        tickingFrom
-      })
+  // const onTimerClick = () => {
+  //   if(cardDetails.tickingFrom){
+  //     const timeSpent = [...cardDetails.timeSpent,{ start: cardDetails.tickingFrom, stop: Date.now() }]
+  //     const tickingFrom = null
+  //     const { list, id, title } = cardDetails
+  //     updateCard({ ...cardDetails,
+  //       list: list.id,
+  //       tickingFrom,
+  //       timeSpent
+  //     })
+  //     updateList({
+  //       list: list.id,
+  //       id,
+  //       title,
+  //       tickingFrom
+  //     })
 
-    } else {
-      const tickingFrom = Date.now()
-      updateCard({ ...cardDetails,list: cardDetails.list.id, tickingFrom })
-      const { list, id, title } = cardDetails
-      updateList({
-        list: list.id,
-        id,
-        title,
-        tickingFrom
-      })
-    }
-  }
+  //   } else {
+  //     const tickingFrom = Date.now()
+  //     updateCard({ ...cardDetails,list: cardDetails.list.id, tickingFrom })
+  //     const { list, id, title } = cardDetails
+  //     updateList({
+  //       list: list.id,
+  //       id,
+  //       title,
+  //       tickingFrom
+  //     })
+  //   }
+  // }
 
   const handleMove = list => {
     //get card details props updatecard and update list

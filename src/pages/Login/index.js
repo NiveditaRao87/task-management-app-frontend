@@ -3,9 +3,13 @@ import Notification from '../../components/Notification'
 import loginService from '../../services/login'
 import { UserContext } from '../../user-context'
 import storage from '../../utils/storage'
-import './login.css'
+import './Login.css'
 
-const Login = () => {
+//To dos convert the input component to a reuseable one
+// Fix auto scroll
+// Fix accessibility
+
+const Login = ({ history }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -53,6 +57,7 @@ const Login = () => {
               type='text'
               align='center'
               placeholder='Username'
+              required
               value={username}
               onChange={event => setUsername(event.target.value)}
             />
@@ -60,12 +65,13 @@ const Login = () => {
               className='login-input'
               type='password'
               align='center'
+              required
               placeholder='Password'
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
             <button className='primary' type='submit'>Sign in</button>
-            <button className='secondary'>Register</button>
+            <button className='secondary' onClick={() => history.push('/register')}>Register</button>
           </form>
         </div>
 

@@ -6,6 +6,7 @@
     padding-top: 5vh;
     color: white;
     font-family: 'Roboto' , sans-serif;
+    overflow-y: scroll;
 }
 
 .login-page h1 {
@@ -15,20 +16,18 @@
 .main-login {
     margin-top: 10vh;
     max-height: 60vh;
-    width: 60vw;
     margin: auto 20vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
     border-radius: 15px;
-    /* overflow: hidden; */
+    overflow-y: hidden;
 }
 .login-img {
     width: 30vw;
 }
 .login-img-wrapper {
     display: block;
-    overflow: hidden;
-    max-height: 60vh;
+    overflow-y: hidden;
 }
 .login-content {
     background-color: #f6f6f6;
@@ -58,4 +57,43 @@
 }
 .login-form button:hover {
     opacity: 1;
+}
+
+@media(max-width: 992px) {
+    .login-page {
+        height: 100vh;
+    }
+    
+    .login-page h1 {
+        padding-bottom: 5vh;
+        font-size: 3vh;
+    }
+    
+    .login-img-wrapper {
+        display: none;
+    }
+    
+    .main-login {
+        display: block;
+        margin: 0 15vw;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        border-radius: 0;
+        max-height: none;
+        font-size: 2vh;
+    }
+    .main-login::-webkit-scrollbar {
+        display: none;
+    }
+    .login-content h2 {
+        margin: 4vh auto;
+        padding-top: 4vh
+    }
+    .login-form input, .login-form button {
+        height: 3vh;
+        width: 100%;
+    }
+    .login-form input::placeholder, .login-form button {
+        font-size: 2vh;
+    }
 }

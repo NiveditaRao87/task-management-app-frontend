@@ -25,7 +25,7 @@
     align-items: center;
     margin-left: 0;
     text-align: left;
-    min-height: calc(100vh - 120px); /* will need fixing while adding responsiveness */ 
+    min-height: calc(100vh - 150px); /* will need fixing while adding responsiveness */ 
   }
 
   .logout {
@@ -41,11 +41,14 @@
   }
 
   .board-footer {
-    height: 50px
+    height: 50px;
   }
   
 @media(min-width: 992px) {
-    .main {
+  body{
+    overflow-y: hidden; /* to keep the body fixed - unscrollable*/
+  }
+  .main {
         flex-direction: row;
         align-items: flex-start;
         margin-left: 20px;
