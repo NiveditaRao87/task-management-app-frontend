@@ -3,7 +3,9 @@
 
 import axios from 'axios'
 import storage from '../utils/storage'
-const baseUrl = 'https://obscure-waters-16235.herokuapp.com/api/lists'
+import {apiBaseUrl} from '../constants'
+
+const baseUrl = `${apiBaseUrl}/lists`
 
 const getConfig = () => {
   return {

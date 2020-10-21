@@ -3,22 +3,27 @@
 // the cancel button from here.
 //To dos Pull timer and other functionalities out of this component its getting too crowded here
 // commented out any traces of timer from here and building a separate component to handle it
-//The new activity log should also be a new component.
+//Change activity log in backend to notes and learnings component.
+//Time tab should show total time spent now and a graph later
 
 //Urgent to do blocking deployment, clean up code for timer
 
 import React, { useState, useEffect } from 'react'
 import cardService from '../services/cards'
-import Editable from './Editable'
+import Editable from '../components/Editable'
+import Timer from './Timer'
 import './CardDetails.css'
 
-const ListsDropDown = ({ lists, currentList, onMove }) => {
+const ListsDropDown = ({ lists, currentList, onMove, setShowLists }) => {
 
   return (
     <>
       <label htmlFor='lists' className='sr-only'>Choose a list to move card to</label>
-      <select id='lists-select' onChange={() => onMove(document.getElementById('lists-select').value)}>
-        {/* <option disabled defaultValue>Move Card</option> */}
+      <select 
+      id='lists-select' 
+      autoFocus
+      onChange={() => onMove(document.getElementById('lists-select').value)}
+      onBlur={() => setShowLists(false)}>
         <option value={currentList.id}>{currentList.title}</option>
         {lists.map(list => list.id !== currentList.id &&
         <option key={list.id} value={list.id} >{list.title}</option>)}
@@ -32,7 +37,7 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
   const [cardDetails, setCardDetails] = useState('')
   const [showLists, setShowLists] = useState('')
 
-  // const [timer,setTimer] = useState()
+//Change useEffect to fetch only on first render then update state and don't fetch again if details already present.
 
   useEffect(() => {
 
@@ -50,19 +55,6 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
 
   },[card])
 
-
-  // useEffect(() => {
-  //   let interval
-  //   if(cardDetails.tickingFrom){
-  //     interval = setInterval(() => {
-  //       setTimer(new Date(Date.now()) - cardDetails.tickingFrom)
-  //     }, 1000)
-  //   } else {
-  //     clearInterval(interval)
-  //   }
-  //   return () => clearInterval(interval)
-  // },[cardDetails.tickingFrom])
-
   const cancelStyle = {
     position: 'absolute',
     top: '10px',
@@ -70,44 +62,6 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
     fontSize: '1.7rem',
     color: '#767c77',
   }
-
-  //   const clockStyle = {
-  //     fontSize: '2rem'
-  //   }
-
-  // const formatDate = (date) => {
-  //   return new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'short', day: 'numeric',hour: 'numeric',minute: 'numeric', second: 'numeric' })
-  // }
-
-  // const onTimerClick = () => {
-  //   if(cardDetails.tickingFrom){
-  //     const timeSpent = [...cardDetails.timeSpent,{ start: cardDetails.tickingFrom, stop: Date.now() }]
-  //     const tickingFrom = null
-  //     const { list, id, title } = cardDetails
-  //     updateCard({ ...cardDetails,
-  //       list: list.id,
-  //       tickingFrom,
-  //       timeSpent
-  //     })
-  //     updateList({
-  //       list: list.id,
-  //       id,
-  //       title,
-  //       tickingFrom
-  //     })
-
-  //   } else {
-  //     const tickingFrom = Date.now()
-  //     updateCard({ ...cardDetails,list: cardDetails.list.id, tickingFrom })
-  //     const { list, id, title } = cardDetails
-  //     updateList({
-  //       list: list.id,
-  //       id,
-  //       title,
-  //       tickingFrom
-  //     })
-  //   }
-  // }
 
   const handleMove = list => {
     //get card details props updatecard and update list
@@ -175,7 +129,7 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
             {cardDetails.list.title}
           </strong>
             :
-            <ListsDropDown lists={lists} currentList={cardDetails.list} onMove={handleMove} />
+            <ListsDropDown lists={lists} currentList={cardDetails.list} onMove={handleMove} setShowLists={setShowLists} />
           }
         </div>
         <br/>
@@ -188,27 +142,22 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, re
                 placeholder='Add a detailed description'
                 updateElement={description => updateCard({ ...cardDetails, list: cardDetails.list.id, description })}
                 isEditing={makeModalStatic}>
-                <span>Add a detailed description</span>
+                <span 
+                className="card-desc"
+                tabIndex='0'
+                >Add a detailed description</span>
               </Editable>
             </div>
             :
-            <div tabIndex='0'>
+            <div>
               <Editable
                 updateElement={description => updateCard({ ...cardDetails, list: cardDetails.list.id, description })}
                 isEditing={makeModalStatic}>
-                <span>{cardDetails.description}</span>
+                <span className="card-desc"  tabIndex='0'>{cardDetails.description}</span>
               </Editable>
             </div>}
         </div>
-        {/* To be implemented later, due date with date picker and the timer */}
-        {/* <div><strong>Due date</strong> <span>{cardDetails.dueDate}</span></div> */}
-        <br/>
-        {/* <i className="far fa-clock" style={clockStyle} onClick={onTimerClick}> {timer? 'Stop': 'Start'} timer</i> */}
-        {/* Shows the ticking clock */}
-        {/* {timer && <p>{new Date(timer).toISOString().substr(11, 8)}</p>} */}
-        {/* {cardDetails.timeSpent && ([...cardDetails.timeSpent]
-        .sort((a,b) => b.start-a.start))
-        .map(timeSpent => <p key={timeSpent.start} >{formatDate(timeSpent.start)} - {formatDate(timeSpent.stop)}</p> )} */}
+        <Timer card={cardDetails} updateCard={updateCard} updateList={updateList} />
         <button className='primary delete-card' onClick={() => handleDelete(cardDetails)}>Delete card</button>
       </div>
       : null)

@@ -30,6 +30,17 @@ const AddArea = ({ area, id, addNewItem }) => {
     }
   },[showForm])
 
+  useEffect(() => {
+    function keyDownListener(e) {
+      if(e.keyCode === 27){
+        onCancel(e)
+      }
+    }
+    document.addEventListener('keydown', keyDownListener)
+    
+    return () => document.removeEventListener("keydown", keyDownListener);
+  })
+
   const onSubmit = e => {
     e.preventDefault()
     newItem && addNewItem(newItem,id) // ID is passed for card to identify on which list card should be created
@@ -46,7 +57,7 @@ const AddArea = ({ area, id, addNewItem }) => {
 
   return showForm ?
     <div className='add-form-wrapper' ref={addFormWrapRef}>
-      <form id='add-form' ref={addFormRef} onSubmit={onSubmit} >
+      <form id='add-form' ref={addFormRef} onSubmit={onSubmit} onBlur={onSubmit} >
         <textarea
           id='add-input'
           placeholder={`Enter a title for the ${area}`}

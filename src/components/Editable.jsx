@@ -4,13 +4,11 @@ import './Editable.css'
 // The reuseable editable component is used to show a text box when an element is clicked.
 // When there is a tab out or when there is a click outside the textarea, it should call an update request
 // which will then be handled in the parent component. An optional isEditing function is passed as a prop which is
-// used to indicate that the Editable component is in editing mode. This was done to make sure that if Editable is a
+// used to indicate that the Editable component is in editing mode. This was done to make sure that, if Editable is a
 // child of a Modal then the Modal can be frozen when editable is clicked so an outside click would result in closing
-// of editable component but not Modal close (was causing memory leaks by updating state after unmount)
-// This component also requires that the edit state be updated from the parent component, which can be done using useRef
-// and useImperativeHandle as explained here https://fullstackopen.com/en/part5/props_children_and_proptypes#references-to-components-with-ref
-// but this would result in too many refs one for each editable child component, which is not ideal
-// Solved thanks to this blog https://blog.logrocket.com/the-complete-guide-to-building-inline-editable-ui-in-react/
+// of editable component but not the Modal (closing both at once was causing memory leaks by updating state after unmount)
+// Reference blogs - https://medium.com/@pitipatdop/little-neat-trick-to-capture-click-outside-with-react-hook-ba77c37c7e82
+//                   https://blog.logrocket.com/the-complete-guide-to-building-inline-editable-ui-in-react/
 
 const Editable = ({ children, updateElement, placeholder, isEditing }) => {
 

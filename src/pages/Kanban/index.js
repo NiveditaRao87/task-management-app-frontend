@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import List from '../../components/List'
 import AddArea from '../../components/AddArea'
-import CardDetails from '../../components/CardDetails'
+import CardDetails from '../../CardDetailsModal/CardDetails'
 import Modal from '../../components/Modal'
 import listService from '../../services/lists'
 import cardService from '../../services/cards'

@@ -4,8 +4,6 @@ import Editable from './Editable'
 import './List.css'
 
 const Card = ({ card, onOpenCard }) => {
-
-
   return <div
     tabIndex="0"
     className='card'
@@ -27,7 +25,8 @@ const List = ({ list, onAddCard, onOpenCard, updateTitle, onDelete }) => {
     </Editable>
     <div className='cards-wrapper'>
       {list.cards.length !== 0 ? list.cards.map(card => <Card key={card.id} card={card} onOpenCard={onOpenCard} />)
-        : <div onClick={() => onDelete(list.id)}>
+        : <div onClick={() => onDelete(list.id)}> 
+        {/* Change delete option to archive  */}
           <label htmlFor='delete-list' className='sr-only'>Delete list</label>
           <i id='delete-list' className="fas fa-trash-alt" tabIndex='0'></i>
         </div>
