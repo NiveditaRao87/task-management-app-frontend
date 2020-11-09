@@ -5,10 +5,9 @@
   }
 
   .App-header {
-    background-color: #1a1a2e;
     min-height: 5vh;
     max-height: 10vh;
-    font-size: 4vh;
+    font-size: 3vh;
     font-style: italic;
     color: #f9f6f7;
     position: fixed;
@@ -16,8 +15,34 @@
     right: 0;
     width: 100%;
     z-index: 2;
+    display: grid;
+    grid-template-columns: 2fr 8fr 1fr 1fr; 
   }
-  
+
+  .app-title {
+    grid-column: 2/3 ;
+  }
+
+  .project {
+    grid-column: 3/4;
+    background-color: transparent !important;
+    z-index: 2;
+  }
+
+  .logout {
+    background-color: transparent !important;
+    grid-column: 4/5;
+    z-index: 2;
+  }
+
+  .logout:hover, .project:hover {
+    background-color: #5c6068 !important; 
+  }
+
+  .board-footer {
+    height: 50px;
+  }
+
   .main {
     padding-top: 8vh;
     display: flex;
@@ -26,22 +51,6 @@
     margin-left: 0;
     text-align: left;
     min-height: calc(100vh - 150px); /* will need fixing while adding responsiveness */ 
-  }
-
-  .logout {
-    position: fixed;
-    right: 20px;
-    z-index: 2;
-    background-color: transparent !important;
-    height: 5vh;
-  }
-
-  .logout:hover {
-    background-color: #5c6068 !important; 
-  }
-
-  .board-footer {
-    height: 50px;
   }
   
 @media(min-width: 992px) {

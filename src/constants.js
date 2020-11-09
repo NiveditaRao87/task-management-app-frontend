@@ -2,6 +2,6 @@
 // For dev
 export const apiBaseUrl = 'http://localhost:3001/api'
 
-export const dateTimePattern = 'd MMM hh:mm'
-
-export const timePattern = 'hh:mm'
+export const datePattern = 'd MMM'
+export const fullDatePattern = 'd MMM yyyy'
+export const timePattern = 'hh:mm a'

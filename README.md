@@ -49,3 +49,6 @@ https://uxdesign.cc/how-to-trap-focus-inside-modal-to-make-it-ada-compliant-6a50
 
 Making redirects work on netlify
 https://dev.to/rajeshroyal/page-not-found-error-on-netlify-reactjs-react-router-solved-43oa
+
+Css for table
+https://dev.to/dcodeyt/creating-beautiful-html-tables-with-css-428l

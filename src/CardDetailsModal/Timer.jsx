@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { format } from 'date-fns'
-import { dateTimePattern, timePattern } from '../constants'
 
 const Timer = ({ card, updateCard, updateList }) => {
   const [timer, setTimer] = useState('')
@@ -22,17 +20,25 @@ const Timer = ({ card, updateCard, updateList }) => {
     marginTop: '20px'
   }
 
-  // const formatDate = (date) => {
-  //   return new Date(date).toLocaleString('en-GB', { year: 'numeric', month: 'short', day: 'numeric',hour: 'numeric',minute: 'numeric' })
-  // }
-
   const onTimerClick = () => {
     if(card.tickingFrom && new Date(card.tickingFrom).getFullYear() !== 1970){
+      if(new Date(card.tickingFrom).getDate() !== new Date().getDate()){
+        let nextStart = card.tickingFrom
+        do {
+          let nextStop = new Date(new Date(nextStart).setHours(24,0,0,0))
+          card.timeSpent = [...card.timeSpent, {start: nextStart, stop: nextStop} ]
+          nextStart = nextStop
+        }while(new Date(nextStart).getDate() !== new Date().getDate())
+        card.timeSpent = [...card.timeSpent, {start: nextStart, stop: new Date(Date.now())}]
+      } else {
       card.timeSpent = [...card.timeSpent,{ start: card.tickingFrom, stop: new Date(Date.now()) }]
+      }
       card.tickingFrom = new Date(0)
-      const { list, id, title } = card
+      const { list, id, title, project } = card
+      console.log(card)
       updateCard({ ...card,
         list: list.id,
+        project: project && project.id
       })
       updateList({
         list: list.id,
@@ -42,7 +48,7 @@ const Timer = ({ card, updateCard, updateList }) => {
     })
     } else {
       card.tickingFrom = new Date(Date.now())
-      updateCard({ ...card,list: card.list.id })
+      updateCard({ ...card,list: card.list.id, project: card.project && card.project.id })
       const { list, id, title } = card
       updateList({
         list: list.id,
@@ -63,15 +69,9 @@ const Timer = ({ card, updateCard, updateList }) => {
         <span>{timer ? 'Stop': 'Start'} timer  </span>
         <i className="fas fa-stopwatch" style={clockStyle} >
       </i>
+      {!timer && card.tickingFrom ? <span style={{marginLeft: "20px"}}>00:00:00</span> :  null }
+      {timer && <span style={{marginLeft: "20px"}}>{new Date(timer).toISOString().substr(11, 8)}</span>}
       </p>
-      {timer && <p>{new Date(timer).toISOString().substr(11, 8)}</p>}
-      {card.timeSpent && ([...card.timeSpent]
-        .sort((a,b) => b.start-a.start))
-        .map(timeSpent => 
-        <p key={timeSpent.start} >
-          {format(new Date(timeSpent.start), dateTimePattern)} - {format(new Date(timeSpent.stop), dateTimePattern)}
-          {format(new Date(new Date(timeSpent.stop) - new Date(timeSpent.start)),timePattern)}
-        </p> )}
     </>
   )
 

@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react'
 import List from '../../components/List'
 import AddArea from '../../components/AddArea'
 import CardDetails from '../../CardDetailsModal/CardDetails'
+import Project from '../../ProjectModal/Project'
 import Modal from '../../components/Modal'
 import listService from '../../services/lists'
 import cardService from '../../services/cards'
+import projectService from '../../services/projects'
 import storage from '../../utils/storage'
 import './Kanban.css'
 import { UserContext } from '../../user-context'
@@ -12,7 +14,9 @@ import { UserContext } from '../../user-context'
 const Kanban = () => {
 
   const [lists, setLists] = useState('')
+  const [projects, setProjects] = useState('')
   const [showCard, setShowCard] = useState(false)
+  const [showProjects, setShowProjects] = useState(false)
   const [cardToShow, setCardToShow] = useState('')
   const { setIsAuthenticated } = useContext(UserContext)
   const [freezeModal, setFreezeModal] = useState('')
@@ -23,6 +27,12 @@ const Kanban = () => {
       .getAll()
       .then(initialLists => {
         setLists(initialLists)
+      })
+    projectService
+      .getAll()
+      .then(projects => {
+        setProjects(projects)
+        console.log(projects)
       })
 
   },[])
@@ -60,7 +70,7 @@ const Kanban = () => {
 
   }
 
-  const handleCloseModal = () => {
+  const handleCloseCard = () => {
     setShowCard(false)
     setCardToShow(null)
   }
@@ -80,6 +90,10 @@ const Kanban = () => {
           : l
       ))
   }
+
+  const handleUpdateProject = newProject => {
+    setProjects([...projects,newProject])
+  }
   const handleUpdateTitle = (updatedList) => {
     setLists(lists.map(list => list.id !== updatedList.id ? list : updatedList))
   }
@@ -98,15 +112,21 @@ const Kanban = () => {
     setIsAuthenticated(false)
   }
 
+  const handleCloseProjects = ()  => {
+    setShowProjects(false)
+  }
+
+  const handleOpenProjects = () => {
+    setShowProjects(true)
+  }
+
 
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1>Task Manager
-          <button className='primary logout' onClick={handleLogout}>
-          Logout
-          </button>
-        </h1>
+        <h1 className='app-title'>Task Manager</h1>
+        <button className='primary project' onClick={handleOpenProjects}>Projects</button>
+        <button className='primary logout' onClick={handleLogout}>Logout</button>
       </header>
       <main className='main'>
         {lists.length !== 0 && lists.map(list =>
@@ -118,15 +138,24 @@ const Kanban = () => {
             updateTitle={handleUpdateTitle}
             onDelete={handleDeleteList}
           />)}
-        {showCard && <Modal onCloseModal={handleCloseModal} freeze={freezeModal}>
+        {showCard && <Modal onCloseModal={handleCloseCard} freeze={freezeModal}>
           <CardDetails
             card={cardToShow}
-            onCardClose={handleCloseModal}
+            onCardClose={handleCloseCard}
             updateList={handleUpdateList}
             makeModalStatic={flag => setFreezeModal(flag)}
             lists={lists}
+            projects={projects}
             removeFromList={handleDeleteCard}
           />
+        </Modal>}
+        {showProjects && <Modal onCloseModal={handleCloseProjects}>
+          <Project 
+          projects={projects}
+          onCloseProjects={handleCloseProjects}
+          updateProject={handleUpdateProject}
+          makeModalStatic={flag => setFreezeModal(flag)}
+          /> 
         </Modal>}
         <AddArea
           area='list'

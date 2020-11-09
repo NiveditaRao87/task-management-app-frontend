@@ -40,11 +40,11 @@
     margin-bottom: 5px;
     word-wrap: break-word;
     border-radius: 5px;
+    font-size: calc(10px + 1vmax);
 }
 
 .card p {
     margin: 10px auto;
-    font-size: 5vmax;
     padding: 2px;
 }
 
@@ -68,6 +68,7 @@
     }
     .card {
     margin-right: 10px;
+    font-size: 5vmax; /*Or should it be in p */
 
     }
     /* .cards-wrapper::-webkit-scrollbar {

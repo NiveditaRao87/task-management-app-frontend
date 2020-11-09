@@ -28,6 +28,13 @@
     overflow-wrap: break-word;
     height: inherit;
 }
+
+.editable-time-from-to {
+    height: 1rem;
+    width: 80px;
+    margin-top: 10px;
+}
+
 @media(min-width: 992px) {
 
     .editable-list-title {

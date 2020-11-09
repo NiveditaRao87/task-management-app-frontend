@@ -1,3 +1,15 @@
+.card-modal {
+    display: grid;
+    grid-template-rows: 1fr 17fr 1fr;
+    height: 100%;
+}
+.btn-close-card {
+    grid-row: 1/2;
+    justify-self: end;
+    font-size: 1.7rem;
+    color: #767c77;
+}
+
 .card-title {
     margin-bottom: 0;
     overflow-wrap: break-word;
@@ -8,9 +20,36 @@
 }
 
 .delete-card {
+    grid-row: 3/4;
     font-size: 1rem;
     border-radius: 10px;
-    position: absolute;
-    bottom: 2vh;
-    right: 1vw;
+    place-self: center end;
+}
+
+.add-duedate {
+    color: rgb(78, 78, 78);
+    cursor: pointer;
+}
+
+.add-duedate:hover {
+    color: black;
+}
+
+.date-picker-input{
+    border-color: #216ba5;
+    width: 125px;
+    margin-left: 20px;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.date-picker-greyed {
+    border-color: grey;
+    color: grey;
+    width: 125px;
+    margin-left: 20px;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
