@@ -1,9 +1,10 @@
 import React, { useContext }  from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { UserContext } from './user-context'
+import { UserContext } from './contexts/user-context'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Kanban from './pages/Kanban'
+import { TimerContextWrapper } from './contexts/timer-context'
 
 const Routes = () => {
 
@@ -13,7 +14,11 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact>
-          { isAuthenticated ? <Kanban /> : <Redirect to='/login' /> }
+          { isAuthenticated 
+            ? <TimerContextWrapper>
+                <Kanban />
+              </TimerContextWrapper>
+            : <Redirect to='/login' /> }
         </Route>
         <Route path='/register' exact component={Register} />
         {/* Have to explicitly pass props when a component

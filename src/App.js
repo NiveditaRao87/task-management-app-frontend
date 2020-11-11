@@ -1,7 +1,7 @@
 import React from 'react'
 import Routes from './routes'
 import './App.css'
-import { ContextWrapper } from './user-context'
+import { ContextWrapper } from './contexts/user-context'
 
 const App = () => {
   return (

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import List from '../../components/List'
 import AddArea from '../../components/AddArea'
-import CardDetails from '../../CardDetailsModal/CardDetails'
-import Project from '../../ProjectModal/Project'
+import CardDetails from '../../components/CardDetailsModal/CardDetails'
+import Project from '../../components/ProjectModal/Project'
 import Modal from '../../components/Modal'
 import listService from '../../services/lists'
 import cardService from '../../services/cards'
 import projectService from '../../services/projects'
 import storage from '../../utils/storage'
 import './Kanban.css'
-import { UserContext } from '../../user-context'
+import { UserContext } from '../../contexts/user-context'
+import { TimerContext } from '../../contexts/timer-context'
 
 const Kanban = () => {
 
@@ -18,7 +19,9 @@ const Kanban = () => {
   const [showCard, setShowCard] = useState(false)
   const [showProjects, setShowProjects] = useState(false)
   const [cardToShow, setCardToShow] = useState('')
+  const [timerCard, setTimerCard] = useState('')
   const { setIsAuthenticated } = useContext(UserContext)
+  const { timerOn } = useContext(TimerContext)
   const [freezeModal, setFreezeModal] = useState('')
 
   useEffect(() => {
@@ -32,10 +35,21 @@ const Kanban = () => {
       .getAll()
       .then(projects => {
         setProjects(projects)
-        console.log(projects)
       })
 
+    cardService
+      .getTimer()
+      .then(timer => 
+        {
+          if(!timer.noTimerOn){
+            storage.saveTimer(timer)
+          }
+        })
   },[])
+
+  useEffect(() => {
+    setTimerCard(storage.loadTimer())
+  }, [timerOn])
 
   const handleAddNewList = (title,...ignore) => {
     const listObject = { title }
@@ -91,8 +105,8 @@ const Kanban = () => {
       ))
   }
 
-  const handleUpdateProject = newProject => {
-    setProjects([...projects,newProject])
+  const handleUpdateProject = projects => {
+    setProjects([...projects])
   }
   const handleUpdateTitle = (updatedList) => {
     setLists(lists.map(list => list.id !== updatedList.id ? list : updatedList))
@@ -103,6 +117,7 @@ const Kanban = () => {
   }
 
   const handleDeleteList = id => {
+    if(!window.confirm('Are you sure you want to delete this list?')) return
     listService.remove(id)
     setLists(lists.filter(list => list.id !== id))
   }
@@ -129,39 +144,41 @@ const Kanban = () => {
         <button className='primary logout' onClick={handleLogout}>Logout</button>
       </header>
       <main className='main'>
-        {lists.length !== 0 && lists.map(list =>
-          <List
-            key={list.id}
-            list={list}
-            onAddCard={handleAddNewCard}
-            onOpenCard={handleOpenCard}
-            updateTitle={handleUpdateTitle}
-            onDelete={handleDeleteList}
-          />)}
-        {showCard && <Modal onCloseModal={handleCloseCard} freeze={freezeModal}>
-          <CardDetails
-            card={cardToShow}
-            onCardClose={handleCloseCard}
-            updateList={handleUpdateList}
-            makeModalStatic={flag => setFreezeModal(flag)}
-            lists={lists}
+          {lists.length !== 0 && lists.map(list =>
+            <List
+              key={list.id}
+              list={list}
+              onAddCard={handleAddNewCard}
+              onOpenCard={handleOpenCard}
+              updateTitle={handleUpdateTitle}
+              onDelete={handleDeleteList}
+              timerCard={timerCard}
+            />)}
+          {showCard && <Modal onCloseModal={handleCloseCard} freeze={freezeModal}>
+            <CardDetails
+              card={cardToShow}
+              onCardClose={handleCloseCard}
+              updateList={handleUpdateList}
+              makeModalStatic={flag => setFreezeModal(flag)}
+              lists={lists}
+              projects={projects}
+              removeFromList={handleDeleteCard}
+            />
+          </Modal>}
+          {showProjects && <Modal onCloseModal={handleCloseProjects} freeze={freezeModal}>
+            <Project 
             projects={projects}
-            removeFromList={handleDeleteCard}
+            onCloseProjects={handleCloseProjects}
+            updateProject={handleUpdateProject}
+            makeModalStatic={flag => setFreezeModal(flag)}
+            setFreezeModal={setFreezeModal}
+            /> 
+          </Modal>}
+          <AddArea
+            area='list'
+            id={null}
+            addNewItem={handleAddNewList}
           />
-        </Modal>}
-        {showProjects && <Modal onCloseModal={handleCloseProjects}>
-          <Project 
-          projects={projects}
-          onCloseProjects={handleCloseProjects}
-          updateProject={handleUpdateProject}
-          makeModalStatic={flag => setFreezeModal(flag)}
-          /> 
-        </Modal>}
-        <AddArea
-          area='list'
-          id={null}
-          addNewItem={handleAddNewList}
-        />
       </main>
       <footer className='board-footer'>
         <p className='attribution'>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Notification from '../../components/Notification'
 import loginService from '../../services/login'
-import { UserContext } from '../../user-context'
+import { UserContext } from '../../contexts/user-context'
 import storage from '../../utils/storage'
 import './Login.css'
 

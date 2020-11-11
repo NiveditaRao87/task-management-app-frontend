@@ -1,7 +1,7 @@
 //doesnt make much sense now as I have only one page to show upon logging in, when there is a navbar and more pages lets add it
 
 import React, { useState, createContext } from 'react'
-import storage from './utils/storage'
+import storage from '../utils/storage'
 
 export const UserContext = createContext()
 

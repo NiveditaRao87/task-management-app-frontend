@@ -5,3 +5,5 @@ export const apiBaseUrl = 'http://localhost:3001/api'
 export const datePattern = 'd MMM'
 export const fullDatePattern = 'd MMM yyyy'
 export const timePattern = 'hh:mm a'
+
+export const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'

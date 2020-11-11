@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { focusableElements } from '../constants'
 import './Modal.css'
 // Reuseable Modal component, right now this is being used only for card detail. Can later be used for opening
 // reports on time tracking.
@@ -9,7 +10,6 @@ import './Modal.css'
 const Modal = ({ children, onCloseModal, freeze }) => {
 
   const modalRef = useRef()
-  const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
   useEffect(() => {
     function keyDownListener(e) {

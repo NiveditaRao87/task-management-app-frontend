@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import Notification from '../../components/Notification'
 import userService from '../../services/user'
 import storage from '../../utils/storage'
-import { UserContext } from '../../user-context'
+import { UserContext } from '../../contexts/user-context'
 import './Register.css'
 
 const Register = ({ history }) => {

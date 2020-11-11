@@ -11,8 +11,8 @@
 import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import { addDays } from 'date-fns';
-import cardService from '../services/cards'
-import Editable from '../components/Editable'
+import cardService from '../../services/cards'
+import Editable from '../Editable'
 import Timer from './Timer'
 import TabsArea from './TabsArea'
 import './CardDetails.css'
@@ -178,7 +178,11 @@ const DueDate = ({ cardDetails, updateCard }) => {
             list: cardDetails.list.id, 
             project: cardDetails.project ? cardDetails.project.id : null, 
             dueDate: date})} />
-      : !showDatePicker && <span className="add-duedate" onClick={() => setShowDatePicker(true)}>Add a due date</span>}
+      : !showDatePicker && <span className="add-duedate" 
+                            onClick={() => setShowDatePicker(true)}
+                            onKeyDown={e => e.key === 'Enter' && setShowDatePicker(true)}>
+                             Add a due date
+                           </span>}
       {showDatePicker && 
         <DatePicker selected={addDays(new Date(),1)} 
         onChange={date => updateDueDate(date)} />}
@@ -246,9 +250,12 @@ const CardDetails = ({ card, onCardClose, updateList, makeModalStatic, lists, pr
   }
 
   const handleDelete = card => {
-    cardService.remove(card.id)
-    removeFromList(card)
-    onCardClose()
+    if(window.confirm(`Are you sure, you want to delete this card? \
+All related data such as time tracking will be deleted.`)){
+      cardService.remove(card.id)
+      removeFromList(card)
+      onCardClose()
+    }
   }
 
   if(!card)

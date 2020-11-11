@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import { focusableElements } from '../constants'
 import './AddArea.css'
 // Reuseable add area for both card and form
 const AddArea = ({ area, id, addNewItem }) => {
@@ -31,15 +32,32 @@ const AddArea = ({ area, id, addNewItem }) => {
   },[showForm])
 
   useEffect(() => {
-    function keyDownListener(e) {
+
+   function keyDownListener(e) {
+      const focusableFormElements = addFormWrapRef.current.querySelectorAll(focusableElements)
+      const firstFocusableElement = focusableFormElements[0]
+      const lastFocusableElement = focusableFormElements[focusableFormElements.length - 1]
+      
       if(e.keyCode === 27){
         onCancel(e)
       }
+      if(e.keyCode === 9 && !e.shiftKey && document.activeElement === lastFocusableElement){
+        firstFocusableElement.focus()
+        e.preventDefault()
+      }
+      if(e.keyCode === 9 && e.shiftKey && document.activeElement === firstFocusableElement){
+        lastFocusableElement.focus()
+        e.preventDefault()
+      }
     }
-    document.addEventListener('keydown', keyDownListener)
+    if(showForm){
+      document.addEventListener('keydown', keyDownListener)
+    }else {
+    document.removeEventListener('keydown', keyDownListener)
+    }
     
     return () => document.removeEventListener("keydown", keyDownListener);
-  })
+  },[showForm])
 
   const onSubmit = e => {
     e.preventDefault()
@@ -57,7 +75,7 @@ const AddArea = ({ area, id, addNewItem }) => {
 
   return showForm ?
     <div className='add-form-wrapper' ref={addFormWrapRef}>
-      <form id='add-form' ref={addFormRef} onSubmit={onSubmit} onBlur={onSubmit} >
+      <form id='add-form' ref={addFormRef} onSubmit={onSubmit} >
         <textarea
           id='add-input'
           placeholder={`Enter a title for the ${area}`}

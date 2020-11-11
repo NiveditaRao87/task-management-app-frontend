@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-import { differenceInMinutes, format, isValid, parse } from 'date-fns'
-import { datePattern, timePattern } from '../constants'
-import Editable from '../components/Editable'
+import React from 'react'
+import { differenceInCalendarDays, 
+  differenceInMinutes, format, isValid, parse, addDays, 
+  isFuture, isAfter, subDays } from 'date-fns'
+import { datePattern, timePattern } from '../../constants'
+import Editable from '../Editable'
 import './TimeTracker.css'
 
 const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
@@ -29,32 +31,71 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
     const updateTimeFrom = (newTimeFrom, timeSpent) => {
       const start = parse(newTimeFrom,timePattern, new Date(timeSpent.start))
       if(isValid(start)){
-        card.timeSpent = card.timeSpent.map(t => t.id !== timeSpent.id
-          ? t
-          : {...t,start}
-          )
-        updateCard({...card, 
-        list: card.list.id,
-        project: card.project && card.project.id
-        })
+        console.log(start, timeSpent)
+        if(new Date(start) > new Date(timeSpent.stop)){
+          window.alert('Start time must be less than stop time')
+        } else {
+          card.timeSpent = card.timeSpent.map(t => t._id !== timeSpent._id
+            ? t
+            : {...t,start}
+            )
+          updateCard({...card, 
+          list: card.list.id,
+          project: card.project && card.project.id
+          })
+        }
       } else {
         window.alert('Invalid date input')
       }
     }
 
     const updateTimeTo = (newTimeTo, timeSpent) => {
-      const stop = parse(newTimeTo,timePattern, new Date(timeSpent.stop))
+      const stop = parse(newTimeTo, timePattern, new Date(timeSpent.stop))
       if(isValid(stop)){
-        card.timeSpent = card.timeSpent.map(t => t.id !== timeSpent.id
-          ? t
-          : {...t,stop}
-          )
-        updateCard({...card, 
-        list: card.list.id,
-        project: card.project && card.project.id
-        })
+        if(new Date(stop) < new Date(timeSpent.start)){
+          window.alert('Stop time must be greater than start time')
+        } else {
+          if(isFuture(stop)){
+            window.alert('Time cannot be in the future')
+          } else {
+            card.timeSpent = card.timeSpent.map(t => t._id !== timeSpent._id
+              ? t
+              : {...t,stop}
+              )
+            updateCard({...card, 
+            list: card.list.id,
+            project: card.project && card.project.id
+            })
+          }
+        }
       } else {
         window.alert('Invalid date input')
+      }
+    }
+
+    const updateDate = (newDate, timeSpent) => {
+      const date = parse(newDate, datePattern, new Date(timeSpent.start))
+      if(isValid(date)){
+        let start, stop
+        if(isAfter(date,new Date(timeSpent.stop))){
+          stop = addDays(new Date(timeSpent.stop),differenceInCalendarDays(date, new Date(timeSpent.stop)))
+          start = addDays(new Date(timeSpent.start),differenceInCalendarDays(date, new Date(timeSpent.start)))
+        }else {
+          stop = subDays(new Date(timeSpent.stop),differenceInCalendarDays(new Date(timeSpent.stop), date))
+          start = subDays(new Date(timeSpent.start),differenceInCalendarDays(new Date(timeSpent.start), date))
+        }
+        if(isFuture(stop)){
+          window.alert('Time cannot be in the future')
+        } else {
+          card.timeSpent = card.timeSpent.map(t => t._id !== timeSpent._id
+            ? t
+            : {...t,stop, start}
+            )
+          updateCard({...card, 
+          list: card.list.id,
+          project: card.project && card.project.id
+          })
+        }
       }
     }
 
@@ -65,7 +106,9 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
         {card.timeSpent.length > 0 && 
           <>
           <p><strong>Total time spent on this task: </strong>
-             <strong className='total-time'>{formatTimeSpent(card.timeSpent.reduce(reducer,0),'in-words')}</strong>
+            <strong className='total-time'>
+              {formatTimeSpent(card.timeSpent.reduce(reducer,0),'in-words')}
+            </strong>
           </p>
           <table className="styled-table">
             <thead>
@@ -82,15 +125,19 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
           .sort((a,b) => b.start-a.start))
           .map(timeSpent => 
             <tr key={timeSpent.start} >
-              <td>{format(new Date(timeSpent.start), datePattern)}</td>
+              <td>
+                <Editable isEditing={makeModalStatic} updateElement={newDate => updateDate(newDate, timeSpent)}>
+                  <span className='date-time' >{format(new Date(timeSpent.start), datePattern)}</span>
+                </Editable>
+              </td>
               <td>
                 <Editable isEditing={makeModalStatic} updateElement={newTimeFrom => updateTimeFrom(newTimeFrom, timeSpent)}>
-                  <span className='time-from-to' tabIndex='0'>{format(new Date(timeSpent.start), timePattern)}</span>
+                  <span className='date/time' tabIndex='0'>{format(new Date(timeSpent.start), timePattern)}</span>
                 </Editable>
               </td>
               <td>
                 <Editable isEditing={makeModalStatic} updateElement={newTimeTo => updateTimeTo(newTimeTo, timeSpent)}>
-                  <span className='time-from-to' tabIndex='0'>{format(new Date(timeSpent.stop), timePattern)}</span>
+                  <span className='date-time' tabIndex='0'>{format(new Date(timeSpent.stop), timePattern)}</span>
                 </Editable>
               </td>
               <td> {formatTimeSpent(differenceInMinutes(new Date(timeSpent.stop),new Date(timeSpent.start)))}</td>
