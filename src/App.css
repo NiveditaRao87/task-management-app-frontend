@@ -16,7 +16,7 @@ h1 {
 }
 /* Responsiveless */
 .attribution{ 
-  font-size: calc(10px + 1vh);
+  font-size: calc(8px + 1vh);
   color: #f9f9f9;
 }
 .attribution a{

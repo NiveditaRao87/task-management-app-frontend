@@ -25,8 +25,13 @@ const getAll = async () => {
   return response.data
 }
 
+const getById = async (id) => {
+  const response = await axios.get(`${ baseUrl }/${id}`, getConfig())
+  return response.data
+}
+
 const remove = async(id) => {
   await axios.delete(`${ baseUrl }/${id}`, getConfig())
 }
 
-export default { create, update, getAll, remove }
+export default { create, update, getAll, getById, remove }

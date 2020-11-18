@@ -20,7 +20,6 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
       if(!window.confirm('Are you sure you want to delete this time entry?') ){
           return
       }
-      console.log(card.timeSpent, timeSpent)
       card.timeSpent = card.timeSpent.filter(t => t.start.toString() !== timeSpent.start.toString())
       updateCard({...card,
             list: card.list.id,
@@ -31,7 +30,6 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
     const updateTimeFrom = (newTimeFrom, timeSpent) => {
       const start = parse(newTimeFrom,timePattern, new Date(timeSpent.start))
       if(isValid(start)){
-        console.log(start, timeSpent)
         if(new Date(start) > new Date(timeSpent.stop)){
           window.alert('Start time must be less than stop time')
         } else {
@@ -132,7 +130,7 @@ const TimeTracker = ({ card, updateCard, makeModalStatic }) => {
               </td>
               <td>
                 <Editable isEditing={makeModalStatic} updateElement={newTimeFrom => updateTimeFrom(newTimeFrom, timeSpent)}>
-                  <span className='date/time' tabIndex='0'>{format(new Date(timeSpent.start), timePattern)}</span>
+                  <span className='date-time' tabIndex='0'>{format(new Date(timeSpent.start), timePattern)}</span>
                 </Editable>
               </td>
               <td>

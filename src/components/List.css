@@ -43,6 +43,15 @@
     font-size: calc(10px + 1vmax);
 }
 
+.card:hover {
+    background-color: #cfcccd;
+    cursor: pointer;
+}
+
+.card:focus {
+    box-shadow: 5px 5px black;
+}
+
 .card p {
     margin: 10px auto;
     padding: 2px;
@@ -54,6 +63,15 @@
     right: 15px;
     color: #f9f6f7;
 }
+
+#delete-list:hover {
+    cursor: pointer;
+}
+
+#delete-list:focus {
+    color: grey;
+}
+
 
 @media(min-width: 992px) {
     .list {

@@ -35,6 +35,15 @@
     margin-top: 10px;
 }
 
+.editable-project-title {
+    height: 2rem;
+    width: 120px;
+}
+.editable-project-detail {
+    height: 1.2rem;
+    width: 100px;
+}
+
 @media(min-width: 992px) {
 
     .editable-list-title {

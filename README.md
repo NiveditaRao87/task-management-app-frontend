@@ -1,25 +1,16 @@
-Published at https://obscure-waters-16235.herokuapp.com/
+Published at https://personaltaskmanager.netlify.app/
 For demo please use username: admin, password: password
 
 This project is a task management app inspired by Trello and Clockify. 
 It will merge the functionalities of both but at a very simple level. Task creation will be tracked by a timer and a report should be generated to show time spent on tasks. 
 A mentor at a Js react club I participated in suggested this project as it is very easily scalable. I found this to be really true, I built this project because then I dont really have to struggle with defining requirements and can just start with it so I get to learn and practice a lot. I can also keep increasing the complexity.
+I also wanted to create a task tracker which will help me with estimation as this was an area which I struggled with when I first started my career in IT.
 
 Functionality implemented so far: 
-1. List and card CRUD including moveing card between lists
-2. Authorisation
-3. Partially accessible
+Adding, modifying and deleting cards, lists and projects. Time tracking on tasks. A report generated on tracked time on project. Registration and authorisation.
 
-Next steps:
-1. Complete time tracking functionality
-2. Registration
-3. Date picker for due date
-4. Fix accessibility
-5. Fix responsiveness
-6. Fix CSS
-7. Add unit tests
-8. Cypress
-9. Drag and drop to move card and lists
+Functionality to be implemented:
+Drag and drop, showing the report on the project in graphical form, showing tasks and weekly, monthly time tracking in calendar, adding checklists and notes, activity tracking and archiving.
 
 References:
 

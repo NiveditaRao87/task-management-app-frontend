@@ -22,7 +22,8 @@ const Timer = ({ card, updateCard, updateList }) => {
 
   const clockStyle = {
     fontSize: '2rem',
-    marginTop: '20px'
+    marginTop: '20px',
+    marginBottom: '20px'
   }
 
   const stopOldTimer = (oldCard) => {
@@ -54,7 +55,6 @@ const Timer = ({ card, updateCard, updateList }) => {
       storage.removeTimer()
       setTimerOn(false)
       const { list, id, title, project } = card
-      console.log(card)
       updateCard({ ...card,
         list: list.id,
         project: project && project.id
@@ -68,7 +68,6 @@ const Timer = ({ card, updateCard, updateList }) => {
     } else {
       if(timerOn){
         const oldTimer = storage.loadTimer()
-        console.log(oldTimer)
         if(!window.confirm(`A timer is already running on task ${oldTimer.title}.\
 Are you sure you want to stop that timer and start one on the task ${card.title}?`)){
            return
@@ -77,7 +76,6 @@ Are you sure you want to stop that timer and start one on the task ${card.title}
         }
       }
       card.tickingFrom = new Date(Date.now())
-      console.log(card)
       updateCard({ ...card,list: card.list.id, project: card.project && card.project.id })
       storage.saveTimer({...card, list: card.list.id, project: card.project && card.project.id})
       setTimerOn(true)

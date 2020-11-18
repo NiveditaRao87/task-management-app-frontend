@@ -1,10 +1,6 @@
 //Child of the modal component. Remember to not add any handling onCardClose within this module and not send any
 //parameters back so that there is consistency when the modal is closed by an outside click or esc key and using
 // the cancel button from here.
-//To dos Pull timer and other functionalities out of this component its getting too crowded here
-// commented out any traces of timer from here and building a separate component to handle it
-//Change activity log in backend to notes and learnings component.
-//Time tab should show total time spent now and a graph later
 
 //Urgent to do blocking deployment, clean up code for timer
 
@@ -51,6 +47,7 @@ const ProjectsDropDown = ({projects, card, onChange, setShowProjects}) => {
         : <option value='default' disabled>Choose a project</option>}
         {projects.map(p => ((card.project && p.id !== card.project.id) || !card.project) &&
         <option key={p.id} value={p.id} >{p.title}</option>)}
+        <option key='remove' value=''>Clear project field</option>
       </select>
     </>
   )
@@ -149,7 +146,7 @@ const CardDescription = ({ cardDetails, updateCard, makeModalStatic}) => (
   </div>
 )
 
-const DueDate = ({ cardDetails, updateCard }) => {
+const DueDate = ({ cardDetails, updateCard, makeModalStatic }) => {
   
   const [showDatePicker, setShowDatePicker] = useState(false)
 
@@ -167,17 +164,32 @@ const DueDate = ({ cardDetails, updateCard }) => {
     })
     setShowDatePicker(false)
   }
+
+  const handleCalendarOpen = () => {
+    console.log('calendar is open')
+    makeModalStatic(true)
+
+  }
+  const handleCalendarClose = () => {
+    console.log('calendar is closed')
+    makeModalStatic(false)
+
+  }
   
   return (<div style={spacingStyle}>
     <strong>Due Date  </strong>
     {cardDetails.dueDate 
       ? <DatePicker selected={new Date(cardDetails.dueDate)} 
           isClearable
-          onChange={date => updateCard({
-            ...cardDetails, 
-            list: cardDetails.list.id, 
-            project: cardDetails.project ? cardDetails.project.id : null, 
-            dueDate: date})} />
+          onCalendarClose={handleCalendarClose}
+          onCalendarOpen={handleCalendarOpen}
+          onChange={date => updateDueDate(date)}
+          // onChange={date => updateCard({
+          //   ...cardDetails, 
+          //   list: cardDetails.list.id, 
+          //   project: cardDetails.project ? cardDetails.project.id : null, 
+          //   dueDate: date})}
+          />
       : !showDatePicker && <span className="add-duedate" 
                             onClick={() => setShowDatePicker(true)}
                             onKeyDown={e => e.key === 'Enter' && setShowDatePicker(true)}>
@@ -185,7 +197,11 @@ const DueDate = ({ cardDetails, updateCard }) => {
                            </span>}
       {showDatePicker && 
         <DatePicker selected={addDays(new Date(),1)} 
-        onChange={date => updateDueDate(date)} />}
+        onChange={date => updateDueDate(date)}
+        onCalendarClose={handleCalendarClose}
+        onCalendarOpen={handleCalendarOpen} 
+        onBlur={() => setShowDatePicker(false)}
+        />}
   </div>)
 }
 
@@ -282,7 +298,7 @@ All related data such as time tracking will be deleted.`)){
             updateCard={updateCard}
             makeModalStatic={makeModalStatic}
           />
-          <DueDate cardDetails={cardDetails} updateCard={updateCard} />
+          <DueDate cardDetails={cardDetails} updateCard={updateCard} makeModalStatic={makeModalStatic} />
           <CardProject cardDetails={cardDetails} projects={projects} updateCard={updateCard} />
           <Timer card={cardDetails} updateCard={updateCard} updateList={updateList} />
           <TabsArea card={cardDetails} updateCard={updateCard} makeModalStatic={makeModalStatic} /> 

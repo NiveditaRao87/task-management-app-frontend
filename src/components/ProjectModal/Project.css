@@ -1,19 +1,41 @@
-.add-project {
+.add-project, .btn-cancel-form {
     font-size: 1.2rem;
     border-radius: 10px;
+    margin: 20px auto;
+    background-color: #0278ae;
+    color: white;
+    padding: 5px 20px; 
 }
-.project-modal-header {
+.btn-cancel-form {
+    color: #0278ae;
+    background-color: white;
+}
+.project-modal-header, .report-modal-header {
     display: grid;
     grid-template-columns: 12fr 1fr;
 }
-.project-modal-title {
+.project-modal-title, .report-modal-title {
     grid-column: 1/2;
     justify-self : center;
 }
-.close-project-modal {
+.close-project-modal, .close-report-modal {
     grid-column: 2/3;
     justify-self: end;
+    color: grey;
 }
+.btn-project-form {
+    margin-top: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #0278ae;
+    color: white;
+    height: 1.8rem;
+    font-size: 1rem;
+}
+.add-estimated {
+    color: #0278ae;
+}
+
 
 #title {
     margin-right: 20px;

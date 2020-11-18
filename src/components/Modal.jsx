@@ -46,6 +46,7 @@ const Modal = ({ children, onCloseModal, freeze }) => {
 
   //freeze flag is set when there is an open form in the Modal which should be closed first
   const handleCloseModal = () => {
+    console.log(freeze)
     !freeze && onCloseModal()
   }
 
