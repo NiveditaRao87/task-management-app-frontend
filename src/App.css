@@ -1,6 +1,6 @@
 body{
   opacity: 1;
-  background: url('./images/title-image.jpe') no-repeat center center fixed;
+  background: url('./images/lake.jpg') no-repeat center center fixed;
   background-size: cover;
   margin: 0 0;
 }
@@ -12,7 +12,7 @@ h1 {
 
 /* Responsiveless */
 ::placeholder {
-  font-size: 1.2rem;
+  font-size: calc(10px + 3vmax);
 }
 /* Responsiveless */
 .attribution{ 
@@ -31,7 +31,9 @@ textarea {
   border-radius: 5px;
 }
 
-
+select {
+  font-size: calc(8px + 3vmin);
+}
 .primary {
   background-color: #5c6068;
   color: white;
@@ -44,6 +46,14 @@ textarea {
 
 @media(min-width: 992px) {
   
+  ::placeholder {
+    font-size: 1.2rem;
+  }
+
+  select {
+    font-size: 1.2rem;
+  }
+
   ::-webkit-scrollbar {
   width: 15px; 
   background: rgba(0,0,0,0);

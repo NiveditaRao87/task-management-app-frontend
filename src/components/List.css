@@ -21,7 +21,7 @@
 .list-title {
     color: #f9f6f7;
     padding-left: 5px;
-    font-size: 5vmax;
+    font-size: calc(10px + 3vmax);
     font-weight: 600;
     margin-right: 20px;
     border-radius: 5px;
@@ -40,7 +40,7 @@
     margin-bottom: 5px;
     word-wrap: break-word;
     border-radius: 5px;
-    font-size: calc(10px + 1vmax);
+    font-size: calc(15px + 2vmax);
 }
 
 .card:hover {
@@ -101,7 +101,7 @@
     }
       */
     .list-title {
-        font-size: 1.2rem;
+        font-size: calc(10px + 2vmin);
     }
     .card p {
         font-size: 1.1rem;

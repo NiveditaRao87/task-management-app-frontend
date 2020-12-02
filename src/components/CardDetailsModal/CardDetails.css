@@ -2,6 +2,7 @@
     display: grid;
     grid-template-rows: 1fr 17fr 1fr;
     height: 100%;
+    font-size: calc(10px + 3vmin);
 }
 .btn-close-card {
     grid-row: 1/2;
@@ -21,7 +22,7 @@
 
 .delete-card {
     grid-row: 3/4;
-    font-size: 1rem;
+    font-size: calc(10px + 3vmin);
     border-radius: 10px;
     place-self: center end;
 }
@@ -52,4 +53,14 @@
     text-align: left;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+@media(min-width: 992px) {
+    .card-modal {
+        font-size: 1.2rem;
+        padding: 10px;
+    }
+    .delete-card {
+        font-size: 1rem;
+    }
 }

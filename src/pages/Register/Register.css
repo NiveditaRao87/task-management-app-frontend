@@ -1,55 +1,59 @@
 /* For now copied as is from the login page, will refactor later */
 
 .register-page {
-    background-color: #41444b;
-    opacity: 1;
-    height: 100vh;
-    text-align: center;
-    padding-top: 5vh;
-    color: white;
-    font-family: 'Roboto' , sans-serif;
-    overflow-y: scroll;
+  background-color: #41444b;
+  opacity: 1;
+  height: 100vh;
+  text-align: center;
+  padding-top: 5vh;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  overflow-y: scroll;
 }
 
 .register-page h1 {
-    padding-bottom: 10vh;
+  padding-bottom: 10vh;
+  font-size: 5vmin;
+  font-family: 'Castoro', serif;
 }
 
 .main-register {
-    margin-top: 10vh;
-    max-height: 60vh;
-    margin: auto 25vw;
+  margin-top: 10vh;
+  max-height: 60vh;
+  margin: auto 25vw;
 }
 
 .register-content {
-    background-color: #f6f6f6;
-    color: black;
-    border-radius: 15px;
-    padding-top: 4vh;
+  background-color: #f6f6f6;
+  color: black;
+  border-radius: 15px;
+  padding-top: 4vh;
 }
 .register-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 70%;
-    margin: 5vh 15%;
-    font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 70%;
+  margin: 5vh 15%;
+  font-size: 1.2rem;
 }
 
-.register-form input, .register-form button {
-    border-radius: 20px;
-    height: 2.5rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-    border: 1px solid grey;
-    opacity: 0.8;
+.register-form input,
+.register-form button {
+  border-radius: 20px;
+  height: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  border: 1px solid grey;
+  opacity: 0.8;
 }
-.register-form input:focus,button:focus {
-    border: 2px solid;
-    outline: none;
+.register-form input:focus,
+button:focus {
+  border: 2px solid;
+  outline: none;
 }
 .register-form button:hover {
-    opacity: 1;
+  opacity: 1;
 }

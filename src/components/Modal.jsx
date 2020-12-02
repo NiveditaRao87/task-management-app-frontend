@@ -4,7 +4,7 @@ import './Modal.css'
 // Reuseable Modal component, right now this is being used only for card detail. Can later be used for opening
 // reports on time tracking.
 // References - https://peteris.rocks/blog/modal-window-in-react-from-scratch/
-//              https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has an error and works 
+//              https://tinloof.com/blog/how-to-create-an-accessible-react-modal/ - Code has an error and works
 //              only because there are only two focusable elements in the modal but otherwise great.
 
 const Modal = ({ children, onCloseModal, freeze }) => {
@@ -46,7 +46,6 @@ const Modal = ({ children, onCloseModal, freeze }) => {
 
   //freeze flag is set when there is an open form in the Modal which should be closed first
   const handleCloseModal = () => {
-    console.log(freeze)
     !freeze && onCloseModal()
   }
 

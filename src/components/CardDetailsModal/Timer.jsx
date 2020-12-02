@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { TimerContext } from '../../contexts/timer-context'
 import cardService from '../../services/cards'
 import storage from '../../utils/storage'
+import './Timer.css'
 
 const Timer = ({ card, updateCard, updateList }) => {
   const [timer, setTimer] = useState('')
@@ -14,17 +15,11 @@ const Timer = ({ card, updateCard, updateList }) => {
         setTimer(new Date(Date.now()) - new Date(card.tickingFrom))
       }, 1000)
     } else {
-        clearInterval(interval)
-        setTimer('')
+      clearInterval(interval)
+      setTimer('')
     }
     return () => clearInterval(interval)
   },[card.tickingFrom])
-
-  const clockStyle = {
-    fontSize: '2rem',
-    marginTop: '20px',
-    marginBottom: '20px'
-  }
 
   const stopOldTimer = (oldCard) => {
     oldCard = checkIfSameDay(oldCard)
@@ -38,12 +33,12 @@ const Timer = ({ card, updateCard, updateList }) => {
       let nextStart = card.tickingFrom
       do {
         let nextStop = new Date(new Date(nextStart).setHours(24,0,0,0))
-        card.timeSpent = [...card.timeSpent, {start: nextStart, stop: nextStop} ]
+        card.timeSpent = [...card.timeSpent, { start: nextStart, stop: nextStop } ]
         nextStart = nextStop
       }while(new Date(nextStart).getDate() !== new Date().getDate())
-      card.timeSpent = [...card.timeSpent, {start: nextStart, stop: new Date(Date.now())}]
+      card.timeSpent = [...card.timeSpent, { start: nextStart, stop: new Date(Date.now()) }]
     } else {
-    card.timeSpent = [...card.timeSpent,{ start: card.tickingFrom, stop: new Date(Date.now()) }]
+      card.timeSpent = [...card.timeSpent,{ start: card.tickingFrom, stop: new Date(Date.now()) }]
     }
     return card
   }
@@ -64,20 +59,20 @@ const Timer = ({ card, updateCard, updateList }) => {
         id,
         title,
         tickingFrom: card.tickingFrom
-    })
+      })
     } else {
       if(timerOn){
         const oldTimer = storage.loadTimer()
         if(!window.confirm(`A timer is already running on task ${oldTimer.title}.\
 Are you sure you want to stop that timer and start one on the task ${card.title}?`)){
-           return
+          return
         } else {
           stopOldTimer(oldTimer)
         }
       }
       card.tickingFrom = new Date(Date.now())
       updateCard({ ...card,list: card.list.id, project: card.project && card.project.id })
-      storage.saveTimer({...card, list: card.list.id, project: card.project && card.project.id})
+      storage.saveTimer({ ...card, list: card.list.id, project: card.project && card.project.id })
       setTimerOn(true)
       const { list, id, title } = card
       updateList({
@@ -91,20 +86,20 @@ Are you sure you want to stop that timer and start one on the task ${card.title}
 
   return (
     <>
-      <span 
-      style={clockStyle}
-      tabIndex='0'
-      onClick={onTimerClick}
-      onKeyDown={e => e.key === 'Enter' && onTimerClick()}>
+      <span
+        className='clock'
+        tabIndex='0'
+        onClick={onTimerClick}
+        onKeyDown={e => e.key === 'Enter' && onTimerClick()}>
         <span>{timer ? 'Stop': 'Start'} timer  </span>
-        <i className="fas fa-stopwatch" style={clockStyle} >
+        <i className="fas fa-stopwatch clock" >
         </i>
-      {!timer && card.tickingFrom ? <span style={{marginLeft: "20px"}}>00:00:00</span> :  null }
-      {timer && <span style={{marginLeft: "20px"}}>{new Date(timer).toISOString().substr(11, 8)}</span>}
+        {!timer && card.tickingFrom ? <span style={{ marginLeft: '20px' }}>00:00:00</span> :  null }
+        {timer && <span style={{ marginLeft: '20px' }}>{new Date(timer).toISOString().substr(11, 8)}</span>}
       </span>
     </>
   )
 
 }
 
-export default Timer;
+export default Timer

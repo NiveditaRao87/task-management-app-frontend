@@ -4,19 +4,19 @@
     border-radius: 5px; /* % causes wierd borders */
     border: none;
     color: #f9f6f7;
-    font-size: 5vmax;
+    font-size: 5vmin;
     text-align: left;
 }
 .add-card:hover {
     background: rgba(0,0,0,0.5);
 }
 .add-list {
-    height: 50px;
+    height: 6vmin;
     background-color:  rgba(0, 0, 0, 0.4);
     border-radius: 5px;
     border: 1px solid grey;
     color: #f9f6f7;/* #172b4d;*/
-    font-size: 5vmax;
+    font-size: 5vmin;
     text-align: center;
   }
 .add-list:hover {
@@ -33,9 +33,9 @@
     padding: 15px;
 }
 .add-form-wrapper textarea {
-    min-height: 10vh;
+    min-height: 10vmin;
     font-family: "Montserrat", sans-serif;
-    font-size: 5vmax;
+    font-size: calc(10px + 3vmax);
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;  /* the width and height will include content, padding and border */
@@ -50,7 +50,7 @@
 }
 
 .add-btn {
-    font-size: 5vmax;
+    font-size: calc(10px + 3vmax);
     flex-grow: 1;
     border-radius: 5px;
 }
@@ -62,7 +62,7 @@
 .cancel-btn {
     flex-grow: 1;
     border-radius: 5px;
-    font-size: 5vmax;
+    font-size: calc(10px + 3vmax);
 }
 
 .cancel-btn:hover {
@@ -73,7 +73,6 @@
     .add-card {
         font-size: 1.2rem; 
         max-width: calc(100% - 20px);
-        
     }
     .add-list {
         font-size: 1.2rem;
@@ -85,6 +84,7 @@
     .add-form-wrapper textarea {
         font-size: 1.2rem;
         min-width: 220px;
+        min-height: 10vh;
     }
     .add-btn {
         font-size: 1.2rem;

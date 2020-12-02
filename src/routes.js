@@ -14,10 +14,10 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route path='/' exact>
-          { isAuthenticated 
+          { isAuthenticated
             ? <TimerContextWrapper>
-                <Kanban />
-              </TimerContextWrapper>
+              <Kanban />
+            </TimerContextWrapper>
             : <Redirect to='/login' /> }
         </Route>
         <Route path='/register' exact component={Register} />

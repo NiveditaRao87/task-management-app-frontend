@@ -11,6 +11,8 @@
 
 .login-page h1 {
     padding-bottom: 10vh;
+    font-family: 'Castoro', serif;
+    font-size: 5vmin;
 }
 
 .main-login {
@@ -70,6 +72,10 @@
     }
     
     .login-img-wrapper {
+        display: none;
+    }
+
+    .login-img-attr {
         display: none;
     }
     

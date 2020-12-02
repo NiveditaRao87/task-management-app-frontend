@@ -1,15 +1,15 @@
 import React from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import TimeTracker from './TimeTracker'
-import 'react-tabs/style/react-tabs.css';
+import 'react-tabs/style/react-tabs.css'
 
 // tabs in this will be time tracked, activity log, notes and learnings, and a checklist of tasks within to be
 // implemented in the order time tracking, notes, activity log and finally checklist
 
-const TabsArea = ({card, updateCard, makeModalStatic}) => {
-  
+const TabsArea = ({ card, updateCard, makeModalStatic }) => {
+
   // const tabList = [{"Activity Log",, "Time tracker", "Notes and learnings", "Checklist"]
-  
+
   return (
     <Tabs>
       <TabList>
@@ -30,7 +30,7 @@ const TabsArea = ({card, updateCard, makeModalStatic}) => {
         page. </h2>
       </TabPanel>
       <TabPanel>
-        <h2> Checlist for sub tasks for better organising the task</h2>
+        <h2> Checklist for sub tasks for better organising the task</h2>
       </TabPanel>
     </Tabs>
   )

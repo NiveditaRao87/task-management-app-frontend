@@ -39,19 +39,19 @@ const Kanban = () => {
 
     cardService
       .getTimer()
-      .then(timer => 
-        {
-          if(!timer.noTimerOn){
-            storage.saveTimer(timer)
-          }
-        })
+      .then(timer =>
+      {
+        if(!timer.noTimerOn){
+          storage.saveTimer(timer)
+        }
+      })
   },[])
 
   useEffect(() => {
     setTimerCard(storage.loadTimer())
   }, [timerOn])
 
-  const handleAddNewList = (title,...ignore) => {
+  const handleAddNewList = (title,) => {
     const listObject = { title }
 
     listService
@@ -139,46 +139,46 @@ const Kanban = () => {
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1 className='app-title'>Task Manager</h1>
+        <h1 className='app-title'>µTasker</h1>
         <button className='primary project' onClick={handleOpenProjects}>Projects</button>
         <button className='primary logout' onClick={handleLogout}>Logout</button>
       </header>
       <main className='main'>
-          {lists.length !== 0 && lists.map(list =>
-            <List
-              key={list.id}
-              list={list}
-              onAddCard={handleAddNewCard}
-              onOpenCard={handleOpenCard}
-              updateTitle={handleUpdateTitle}
-              onDelete={handleDeleteList}
-              timerCard={timerCard}
-            />)}
-          {showCard && <Modal onCloseModal={handleCloseCard} freeze={freezeModal}>
-            <CardDetails
-              card={cardToShow}
-              onCardClose={handleCloseCard}
-              updateList={handleUpdateList}
-              makeModalStatic={flag => setFreezeModal(flag)}
-              lists={lists}
-              projects={projects}
-              removeFromList={handleDeleteCard}
-            />
-          </Modal>}
-          {showProjects && <Modal onCloseModal={handleCloseProjects} freeze={freezeModal}>
-            <Project 
+        {lists.length !== 0 && lists.map(list =>
+          <List
+            key={list.id}
+            list={list}
+            onAddCard={handleAddNewCard}
+            onOpenCard={handleOpenCard}
+            updateTitle={handleUpdateTitle}
+            onDelete={handleDeleteList}
+            timerCard={timerCard}
+          />)}
+        {showCard && <Modal onCloseModal={handleCloseCard} freeze={freezeModal}>
+          <CardDetails
+            card={cardToShow}
+            onCardClose={handleCloseCard}
+            updateList={handleUpdateList}
+            makeModalStatic={flag => setFreezeModal(flag)}
+            lists={lists}
+            projects={projects}
+            removeFromList={handleDeleteCard}
+          />
+        </Modal>}
+        {showProjects && <Modal onCloseModal={handleCloseProjects} freeze={freezeModal}>
+          <Project
             projects={projects}
             onCloseProjects={handleCloseProjects}
             updateProject={handleUpdateProject}
             makeModalStatic={flag => setFreezeModal(flag)}
             setFreezeModal={setFreezeModal}
-            /> 
-          </Modal>}
-          <AddArea
-            area='list'
-            id={null}
-            addNewItem={handleAddNewList}
           />
+        </Modal>}
+        <AddArea
+          area='list'
+          id={null}
+          addNewItem={handleAddNewList}
+        />
       </main>
       <footer className='board-footer'>
         <p className='attribution'>

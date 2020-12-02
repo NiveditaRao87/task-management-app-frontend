@@ -1,5 +1,8 @@
+.project-modal {
+    font-size: calc(10px + 3vmin);
+}
 .add-project, .btn-cancel-form {
-    font-size: 1.2rem;
+    font-size: calc(10px + 3vmin);
     border-radius: 10px;
     margin: 20px auto;
     background-color: #0278ae;
@@ -29,8 +32,8 @@
     padding-right: 10px;
     background-color: #0278ae;
     color: white;
-    height: 1.8rem;
-    font-size: 1rem;
+    height: calc(20px + 3vmin);
+    font-size: calc(10px + 3vmin);
 }
 .add-estimated {
     color: #0278ae;
@@ -43,4 +46,17 @@
 
 #due-date {
     margin-right: 20px;
+}
+
+@media(min-width: 992px) {
+    .project-modal {
+        font-size: 1.2rem;
+    }
+    .add-project, .btn-cancel-form {
+        font-size: 1.2rem;
+    }
+    .btn-project-form {
+        font-size: 1.2rem;
+        height: 1.8rem;
+    }
 }

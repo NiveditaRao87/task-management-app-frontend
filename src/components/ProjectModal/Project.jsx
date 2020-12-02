@@ -8,18 +8,18 @@ import Modal from '../Modal'
 import { useField } from '../../hooks'
 import './Project.css'
 
-const ProjectForm = ({projects, updateProject, makeModalStatic, setShowProjectForm }) => {
-  
-  const title = useField('text','title') 
+const ProjectForm = ({ projects, updateProject, makeModalStatic, setShowProjectForm }) => {
+
+  const title = useField('text','title')
   const estimatedHours = useField('number','estimated-hours')
-  const [dueDate, setDueDate] = useState(new Date()) 
+  const [dueDate, setDueDate] = useState(new Date())
 
   const reset = () => {
     title.reset()
     estimatedHours.reset()
   }
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setDueDate(new Date(new Date(dueDate).setHours(23,0,0,0)))
@@ -52,12 +52,12 @@ const ProjectForm = ({projects, updateProject, makeModalStatic, setShowProjectFo
         <label htmlFor='title'><strong>Title  </strong></label>
         <input {...title.form} />
         <label htmlFor='due-date'><strong>Due Date  </strong></label>
-        <DatePicker 
-        id='due-date'
-        selected={dueDate}
-        onChange={date => setDueDate(date)}
-        onCalendarOpen={handleCalendarOpen}
-        onCalendarClose={handleCalendarClose} />
+        <DatePicker
+          id='due-date'
+          selected={dueDate}
+          onChange={date => setDueDate(date)}
+          onCalendarOpen={handleCalendarOpen}
+          onCalendarClose={handleCalendarClose} />
         <label htmlFor='estimated-hours'><strong>Estimated hours  </strong></label>
         <input {...estimatedHours.form} />
         <button type='submit' className='blue add-project'>
@@ -69,7 +69,7 @@ const ProjectForm = ({projects, updateProject, makeModalStatic, setShowProjectFo
   )
 }
 
-const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) => {
+const ProjectList = ({ projects, onShowReport, makeModalStatic, updateProject }) => {
 
   const handleDeleteProject = project => {
     if(!(window.confirm('Are you sure you want to delete this project?'))){
@@ -77,13 +77,13 @@ const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) =
     }
     projectService
       .remove(project.id)
-      .then(response => {
-        updateProject([...projects.filter(p =>p.id !== project.id)])
+      .then(() => {
+        updateProject([...projects.filter(p => p.id !== project.id)])
       })
   }
 
   const updateProjectDetails = project => {
-    const sortByDueDate = (a,b) => compareDesc(new Date(a.dueDate),new Date(b.dueDate)) !== 0 
+    const sortByDueDate = (a,b) => compareDesc(new Date(a.dueDate),new Date(b.dueDate)) !== 0
       ? compareDesc(new Date(a.dueDate),new Date(b.dueDate))
       : a.estimatedHours - b.estimatedHours
     project.cards = project.cards.length !== 0 ? project.cards.map(c => c.id ? c.id : c) : []
@@ -91,8 +91,8 @@ const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) =
     projectService
       .update(project.id,project)
       .then(response => {
-         updateProject([...projects.filter(p =>p.id !== project.id),{...response}].sort(sortByDueDate))      
-         makeModalStatic(false)
+        updateProject([...projects.filter(p => p.id !== project.id),{ ...response }].sort(sortByDueDate))
+        makeModalStatic(false)
       })
   }
 
@@ -100,28 +100,28 @@ const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) =
     <>
       <h2>Projects list</h2>
       <table className="styled-table">
-          <thead>
-            <tr>
-              <th>Title </th>
-              <th>Due Date </th>
-              <th>Estimated hours</th>
-              <th>Action </th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects.map(p =>
+        <thead>
+          <tr>
+            <th>Title </th>
+            <th>Due Date </th>
+            <th>Estimated hours</th>
+            <th>Action </th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map(p =>
             <tr key={p.id}>
               <td>
-                <Editable 
-                isEditing={makeModalStatic} 
-                updateElement={title => updateProjectDetails({...p,title})} >
+                <Editable
+                  isEditing={makeModalStatic}
+                  updateElement={title => updateProjectDetails({ ...p,title })} >
                   <span tabIndex='0' className='project-title'>{p.title}</span>
                 </Editable>
               </td>
               <td>
                 <Editable
-                isEditing={makeModalStatic}
-                updateElement={dueDate => updateProjectDetails({...p,dueDate})}
+                  isEditing={makeModalStatic}
+                  updateElement={dueDate => updateProjectDetails({ ...p,dueDate })}
                 >
                   <span tabIndex='0' className='project-detail'>
                     {format(new Date(p.dueDate), fullDatePattern)}
@@ -130,11 +130,11 @@ const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) =
               </td>
               <td>
                 <Editable
-                isEditing={makeModalStatic}
-                updateElement={estimatedHours => updateProjectDetails({...p,estimatedHours})}
+                  isEditing={makeModalStatic}
+                  updateElement={estimatedHours => updateProjectDetails({ ...p,estimatedHours })}
                 >
                   <span tabIndex='0' className='project-detail'>
-                  {p.estimatedHours ? p.estimatedHours : <strong className='add-estimated'>+ Add</strong>}
+                    {p.estimatedHours ? p.estimatedHours : <strong className='add-estimated'>+ Add</strong>}
                   </span>
                 </Editable>
               </td>
@@ -149,8 +149,8 @@ const ProjectList = ({projects, onShowReport, makeModalStatic, updateProject}) =
                 </button>
               </td>
             </tr>)}
-          </tbody>
-      </table>   
+        </tbody>
+      </table>
     </>
   )
 }
@@ -171,8 +171,8 @@ const Report = ({ project, onCloseReport }) => {
   return (
     <div>
       <h1 className='report-modal-header'>
-          <span className='report-modal-title'>{projectReport.title}</span>
-          <i
+        <span className='report-modal-title'>{projectReport.title}</span>
+        <i
           tabIndex='0'
           className="fas fa-times close-report-modal"
           onClick={() => onCloseReport()}
@@ -187,55 +187,55 @@ const Report = ({ project, onCloseReport }) => {
   )
 }
 
-const Project = ({projects, onCloseProjects, updateProject, makeModalStatic }) => {
+const Project = ({ projects, onCloseProjects, updateProject, makeModalStatic }) => {
 
-    const [showReport, setShowReport] = useState(false)
-    const [projectToShow, setProjectToShow] = useState(false)
-    const [showProjectForm, setShowProjectForm] = useState(false)
+  const [showReport, setShowReport] = useState(false)
+  const [projectToShow, setProjectToShow] = useState(false)
+  const [showProjectForm, setShowProjectForm] = useState(false)
 
-    const handleShowReport = (project) => {
-      setShowReport(true)
-      setProjectToShow(project)
-      makeModalStatic(true)
-    }
-    
-    const handleCloseReport = () => {
-      setShowReport(false)
-      setProjectToShow(null)
-      makeModalStatic(false)
-    }
+  const handleShowReport = (project) => {
+    setShowReport(true)
+    setProjectToShow(project)
+    makeModalStatic(true)
+  }
 
-    return (
-      <>
-        <h1 className='project-modal-header'>
-          <span className='project-modal-title'>Projects</span>
-          <i
+  const handleCloseReport = () => {
+    setShowReport(false)
+    setProjectToShow(null)
+    makeModalStatic(false)
+  }
+
+  return (
+    <div className='project-modal'>
+      <h1 className='project-modal-header'>
+        <span className='project-modal-title'>Projects</span>
+        <i
           tabIndex='0'
           className="fas fa-times close-project-modal"
           onClick={() => onCloseProjects()}
           onKeyDown={e => e.key === 'Enter' && onCloseProjects()} />
-        </h1>
-        {showProjectForm 
-          ? <ProjectForm 
-              projects={projects} 
-              updateProject={updateProject}
-              makeModalStatic={makeModalStatic}
-              setShowProjectForm={setShowProjectForm} />
-          : <button className='btn-project-form' onClick={() => setShowProjectForm(true)}>Create a new Project</button>
-        }
-        <ProjectList 
+      </h1>
+      {showProjectForm
+        ? <ProjectForm
+          projects={projects}
+          updateProject={updateProject}
+          makeModalStatic={makeModalStatic}
+          setShowProjectForm={setShowProjectForm} />
+        : <button className='btn-project-form' onClick={() => setShowProjectForm(true)}>Create a new Project</button>
+      }
+      <ProjectList
         projects={projects}
         makeModalStatic={makeModalStatic}
         onShowReport={handleShowReport}
         updateProject={updateProject}
-        />
-         
-        {showReport && 
+      />
+
+      {showReport &&
           <Modal onCloseModal={handleCloseReport} >
             <Report project={projectToShow} onCloseReport={handleCloseReport} />
-          </Modal>}    
-      </>
-    )
+          </Modal>}
+    </div>
+  )
 }
 
 export default Project

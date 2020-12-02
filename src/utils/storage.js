@@ -10,7 +10,7 @@ const loadUser = () =>
 const logoutUser = () =>
   localStorage.removeItem(userKey)
 
-const saveTimer = (timer) => 
+const saveTimer = (timer) =>
   localStorage.setItem(timerKey, JSON.stringify(timer))
 
 const loadTimer = () =>

@@ -45,7 +45,7 @@ const Editable = ({ children, updateElement, placeholder, isEditing }) => {
   const handleSubmit = e => {
     e.preventDefault()
     setEdit(false)
-    placeholder !== newValue && updateElement(newValue)
+    placeholder !== newValue ? updateElement(newValue) : isEditing(false)
   }
 
   const handleEdit = () => {

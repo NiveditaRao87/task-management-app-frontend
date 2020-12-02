@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {apiBaseUrl} from '../constants'
+import { apiBaseUrl } from '../constants'
 
 const baseUrl = `${apiBaseUrl}/login`
 

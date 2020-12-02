@@ -53,7 +53,7 @@ const Register = ({ history }) => {
 
   return (<div className='register-page'>
     <header>
-      <h1>Task Management app</h1>
+      <h1>µTasker</h1>
     </header>
     <main className='main-register'>
       <div className='register-content'>

@@ -1,0 +1,11 @@
+.clock {
+    font-size: calc(10px + 3vmax);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media(min-width: 992px) {
+    .clock{
+        font-size: 2rem;
+    }
+}

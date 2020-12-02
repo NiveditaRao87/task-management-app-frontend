@@ -1,3 +1,4 @@
+
 /* Will later be moved to a navbar component when i have more pages, which is why the classnames have App */
 .App {
     text-align: center;
@@ -13,26 +14,31 @@
     position: fixed;
     top: 0;
     right: 0;
+    left: 0;
     width: 100%;
     z-index: 2;
     display: grid;
     grid-template-columns: 2fr 8fr 1fr 1fr; 
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   .app-title {
     grid-column: 2/3 ;
+    font-family: 'Castoro', serif;
   }
 
   .project {
     grid-column: 3/4;
     background-color: transparent !important;
     z-index: 2;
+    font-size: calc(10px + 1vmax)
   }
 
   .logout {
     background-color: transparent !important;
     grid-column: 4/5;
     z-index: 2;
+    font-size: calc(10px + 1vmax)
   }
 
   .logout:hover, .project:hover {
@@ -61,7 +67,6 @@
         flex-direction: row;
         align-items: flex-start;
         margin-left: 20px;
-
       }
       .App-header {
         font-size: calc(2px + 2vmin);

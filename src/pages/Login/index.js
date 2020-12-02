@@ -41,11 +41,13 @@ const Login = ({ history }) => {
   return (
     <div className='login-page'>
       <header>
-        <h1>Task Management app</h1>
+        <h1>µTasker</h1>
       </header>
       <main className='main-login'>
         <div className='login-img-wrapper'>
-          <img className='login-img' src={require('../../images/andrew-neel-ute2XAFQU2I-unsplash.jpg')} alt=''/>
+          <img className='login-img'
+            // eslint-disable-next-line no-undef
+            src={require('../../images/andrew-neel-ute2XAFQU2I-unsplash.jpg')} alt=''/>
         </div>
         <div className='login-content'>
           <h2>Login</h2>
@@ -77,7 +79,7 @@ const Login = ({ history }) => {
 
       </main>
       <footer>
-        <p className='attribution'>
+        <p className='attribution login-img-attr'>
           <span>Photo by </span>
           <a href='https://unsplash.com/@andrewtneel' target='_blank' rel='noopener noreferrer'>Andrew Neel</a>
           <span> on </span>

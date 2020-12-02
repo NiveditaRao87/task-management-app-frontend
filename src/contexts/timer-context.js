@@ -6,11 +6,11 @@ import storage from '../utils/storage'
 export const TimerContext = createContext()
 
 export const TimerContextWrapper = ({ children }) => {
-  const defaultValueHandler = () => { 
+  const defaultValueHandler = () => {
     const timer = storage.loadTimer()
     if (timer) return true
     return false
-    
+
   }
 
   const [timerOn, setTimerOn] = useState(defaultValueHandler())

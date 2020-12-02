@@ -3,7 +3,7 @@
 
 import axios from 'axios'
 import storage from '../utils/storage'
-import {apiBaseUrl} from '../constants'
+import { apiBaseUrl } from '../constants'
 
 const baseUrl = `${apiBaseUrl}/lists`
 
